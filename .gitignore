@@ -1,0 +1,14 @@
+# .gitignore
+
+# IntelliJ
+*.iml
+.idea
+
+
+# Mac
+.DS_Store
+
+# NPM
+node_modules
+npm-debug.*
+
