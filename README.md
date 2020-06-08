@@ -10,7 +10,14 @@ What is complete so far
 What is pending
 - Front end and mockup pages
 - Coding for Basic UI
-- User login
+- User database
+- Encryptions and Decryptions
+- Deposit function
+- Withdrawal function
+- Cookies Pop-up function
+- Admin approval function
+- Signup, Signin function
+- Download Bank Statement function
 
 Mirabela Medallon
 - Worked on: Setting up the basic app code and mongodb atlas
@@ -22,7 +29,7 @@ Tyler Chinen
 
 Wei Leong Hiew
 - Worked on: ESLint plugin with IntelliJ
-- Next: User Login
+- Next: Deposit function
 
 Patima Poochai
 - Worked on: Installation of React and Meteor plugins for ESLint
