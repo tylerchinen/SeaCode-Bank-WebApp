@@ -5,6 +5,7 @@ What is complete so far
 - Setting up the basic app code and mongodb atlas
 - Coding for Basic UI
 - ESLint plugin with IntelliJ
+- Installation of React and Meteor plugins for ESLint
 
 What is pending
 - Front end and mockup pages
@@ -24,5 +25,5 @@ Wei Leong Hiew
 - Next: User Login
 
 Patima Poochai
-- Worked on: 
-- Next:
+- Worked on: Installation of React and Meteor plugins for ESLint
+- Next: User database
