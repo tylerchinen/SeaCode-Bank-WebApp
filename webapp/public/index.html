@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <!-- <script src="javascriptfilename.js"></script> -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -25,18 +24,79 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <title>SeaCode</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"/>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <!-- <script src="javascriptfilename.js"></script> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-      <div class="ui text container">
-        <h1 class="ui header">SeaCode Banking WebApp</h1>
-        <p>Testing Semantic Formatting</p>
+
+    <div class="ui borderless menu">
+      <div class="link item">
+        <div class="ui transparent icon input">
+          <i class="fa fa-bank"></i>
+        </div>
       </div>
+
+      <div class="title item"><a class="text">SeaCode Bank</a></div>
+
+      <div class="right menu">
+        <div class="link item"><a class="text">Home</a></div>
+
+          <div class="link item"><a class="text">About Us</a></div>
+
+        <div class="ui dropdown item">
+          <div class="text">Login</div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="ui input"><input type="text" placeholder="Username"></div>
+            <div class="ui input"><input type="text" placeholder="Password"></div>
+            <button class="ui primary button">Login</button>
+            <div class="link item"><a class="text">New? Create New Account</a></div>
+          </div>
+        </div>
+
+        <div class="link item">
+          <div class="ui transparent icon input">
+            <i class="search icon"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="head">
+      <h2 class="ui center aligned icon header">
+        <i class="circular credit card icon"></i>
+        SeaCode Bank
+      </h2>
+    </div>
+
+    <img class="ui fluid image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80" alt="Island Snow Hawaii" itemprop="logo">
+
+    <div class="footer-background">
+      <div class="ui two column grid container">
+        <div class="column">
+          <div class="ui list">
+            <div class="item">About Us</div>
+            <div class="item">GitHub</div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="item">Login</div>
+          <div class="item">Sign Up</div>
+        </div>
+      </div>
+
+    </div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -47,5 +107,9 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      $('.ui.dropdown')
+          .dropdown();
+    </script>
   </body>
 </html>
