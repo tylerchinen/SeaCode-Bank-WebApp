@@ -12,17 +12,17 @@ What is pending
 - User login
 
 Mirabela Medallon
-Worked on: Setting up the basic app code and mongodb atlas
-Next: Front end and mockup pages
+- Worked on: Setting up the basic app code and mongodb atlas
+- Next: Front end and mockup pages
 
 Tyler Chinen
-Worked on: Coding for Basic UI
-Next: Coding for Basic UI
+- Worked on: Coding for Basic UI
+- Next: Coding for Basic UI
 
 Wei Leong Hiew
-Worked on: ESLint plugin with IntelliJ
-Next: User Login
+- Worked on: ESLint plugin with IntelliJ
+- Next: User Login
 
 Patima Poochai
-Worked on: 
-Next:
+- Worked on: 
+- Next:
