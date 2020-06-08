@@ -1,5 +1,9 @@
 {
-  "extends": "airbnb-base",
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
