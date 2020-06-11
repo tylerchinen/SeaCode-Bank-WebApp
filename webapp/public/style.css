@@ -8,35 +8,26 @@
 }
 
 h2{
-  background-color: aqua;
+  background-color: white;
   color: black;
 }
 
 .ui.primary.button{
   margin-left: 10px;
 }
-.head{
-  margin-left: 30px;
-}
-
-.colorblocktop {
-  padding-top: 20px;
-}
 
 .ui.image {
-  padding-top: 25%;
-}
-
-.pictext.text {
-  padding-top: 40%;
-  color: white;
-  font-size: 18px;
-  text-align: center;
+  padding-top: 10px;
 }
 
 .footer-background {
   background-color: dodgerblue;
   color: white;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.public-disclosure {
+  padding-left: 60px;
+  padding-right: 60px;
 }
