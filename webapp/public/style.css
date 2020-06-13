@@ -31,3 +31,14 @@ h2{
   padding-left: 60px;
   padding-right: 60px;
 }
+
+.dummy-text {
+  font-size: 18px;
+  padding-right: 100px;
+  padding-left: 100px;
+  padding-bottom: 60px;
+}
+
+.link.item a:hover{
+  color: red;
+}
