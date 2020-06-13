@@ -2,10 +2,10 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {Menu, Dropdown, Header} from 'semantic-ui-react';
 
-class Navbar extends React.Component {
+export default class Navbar extends React.Component {
     render() {
         return (
-            <Menu attached="top" borderless inverted>
+            <Menu style={{ paddingBottom: '15px' }} attached="top" borderless inverted>
                 <Menu.Item as={NavLink} exact to="/" key='home'>Home</Menu.Item>
                 <Menu.Item as={NavLink} exact to="/dashboard" key='dashboard'>Dashboard</Menu.Item>
                 <Menu.Item position="right">
