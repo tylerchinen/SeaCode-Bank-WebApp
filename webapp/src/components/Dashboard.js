@@ -22,7 +22,7 @@ export default class Home extends React.Component {
                         <Header.Subheader>
                         Deposit cash or checks into your account.
                         </Header.Subheader>
-                        <Button style={{marginTop: '10px'}} as={NavLink} exact to="/dashboard/deposit" key='deposit' >GO</Button>
+                        <Button style={{marginTop: '10px'}} as={NavLink} exact to="/deposit" key='deposit' >GO</Button>
                     </Header>
                     </Grid.Column>
                     <Grid.Column textAlign='center'>
@@ -32,7 +32,7 @@ export default class Home extends React.Component {
                         <Header.Subheader>
                         Withdraw cash from your account.
                         </Header.Subheader>
-                        <Button style={{marginTop: '10px'}}as={NavLink} exact to="/dashboard/withdraw" key='withdraw' >GO</Button>
+                        <Button style={{marginTop: '10px'}}as={NavLink} exact to="/withdraw" key='withdraw' >GO</Button>
                     </Header>
                     </Grid.Column>
                     </Grid.Row>
@@ -44,7 +44,7 @@ export default class Home extends React.Component {
                         <Header.Subheader>
                         Transfer funds to another person.
                         </Header.Subheader>
-                        <Button style={{marginTop: '10px'}}as={NavLink} exact to="/dashboard/wire" key='wire' >GO</Button>
+                        <Button style={{marginTop: '10px'}}as={NavLink} exact to="/wire" key='wire' >GO</Button>
                     </Header>
                     </Grid.Column>
                     <Grid.Column textAlign='center'>
@@ -54,7 +54,7 @@ export default class Home extends React.Component {
                         <Header.Subheader>
                         See your transaction records.
                         </Header.Subheader>
-                        <Button style={{marginTop: '10px'}}as={NavLink} exact to="/dashboard/history" key='history' >GO</Button>
+                        <Button style={{marginTop: '10px'}}as={NavLink} exact to="/history" key='history' >GO</Button>
                     </Header>
                     </Grid.Column>
                     </Grid.Row>

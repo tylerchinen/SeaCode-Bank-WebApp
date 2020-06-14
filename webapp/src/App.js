@@ -26,10 +26,10 @@ function App() {
       <Route path='/signup'  component={SignUp} />
       <Route path='/dashboard'  component={Dashboard} />
       <Route path='/adashboard'  component={AdminDashboard} />
-      <Route path='/dashboard/deposit'  component={Deposit} />
-      <Route path='/dashboard/withdraw'  component={Withdraw} />
-      <Route path='/dashboard/wire'  component={Wire} />
-      <Route path='/dashboard/history'  component={History} />
+      <Route path='/deposit'  component={Deposit} />
+      <Route path='/withdraw'  component={Withdraw} />
+      <Route path='/wire'  component={Wire} />
+      <Route path='/history'  component={History} />
 
     </Router>
   );
