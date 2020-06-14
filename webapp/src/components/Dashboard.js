@@ -1,34 +1,36 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Grid, Header, Icon, Segment, Button } from 'semantic-ui-react';
+import { Container, Grid, Header, Icon, Segment, Button, Statistic } from 'semantic-ui-react';
 
 export default class Home extends React.Component {
     render() {
         return (
             <Container textAlign='center' fluid style ={{backgroundImage: `url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80)`,
             height: '100vh', backgroundSize: 'cover'}}>
-                <Header style={{paddingTop: '10px'}} as='h3'>Welcome to Seabank, User</Header>
-                <Header style={{marginBottom: '-20px'}} as='h5'>ACCOUNT BALANCE</Header>
-                <Header as='h1'>$100,000</Header>
+                <Header style={{paddingTop: '10px'}} as='h3'>Welcome to Seabank, Firstname Lastname</Header>
+                <Statistic>
+                    <Statistic.Value>$5,550</Statistic.Value>
+                    <Statistic.Label>Account Balance</Statistic.Label>
+                </Statistic>
                 <Segment style ={{marginLeft: '100px', marginRight: '100px'}}>
                 <Grid celled='internally' centered columns={2}>
                     <Grid.Row>
                     <Grid.Column textAlign='center'>
                     <Header as='h2' icon>
-                        <Icon name='upload' />
+                        <Icon name='download' />
                         Deposit
                         <Header.Subheader>
-                        Manage your account settings and set e-mail preferences.
+                        Deposit cash or checks into your account.
                         </Header.Subheader>
                         <Button style={{marginTop: '10px'}} as={NavLink} exact to="/dashboard/deposit" key='deposit' >GO</Button>
                     </Header>
                     </Grid.Column>
                     <Grid.Column textAlign='center'>
                     <Header as='h2' icon>
-                        <Icon name='download' />
+                        <Icon name='upload' />
                         Withdraw
                         <Header.Subheader>
-                        Manage your account settings and set e-mail preferences.
+                        Withdraw cash from your account.
                         </Header.Subheader>
                         <Button style={{marginTop: '10px'}}as={NavLink} exact to="/dashboard/withdraw" key='withdraw' >GO</Button>
                     </Header>
@@ -40,7 +42,7 @@ export default class Home extends React.Component {
                         <Icon name='exchange' />
                         Wire Funds
                         <Header.Subheader>
-                        Manage your account settings and set e-mail preferences.
+                        Transfer funds to another person.
                         </Header.Subheader>
                         <Button style={{marginTop: '10px'}}as={NavLink} exact to="/dashboard/wire" key='wire' >GO</Button>
                     </Header>
@@ -50,7 +52,7 @@ export default class Home extends React.Component {
                         <Icon name='file alternate outline' />
                         Account History
                         <Header.Subheader>
-                        Manage your account settings and set e-mail preferences.
+                        See your transaction records.
                         </Header.Subheader>
                         <Button style={{marginTop: '10px'}}as={NavLink} exact to="/dashboard/history" key='history' >GO</Button>
                     </Header>
