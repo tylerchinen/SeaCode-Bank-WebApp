@@ -12,6 +12,7 @@ import Deposit from './components/Deposit'
 import Withdraw from './components/Withdraw'
 import Wire from './components/Wire'
 import PublicDisclosure from './components/PublicDisclosure'
+import History from './components/History'
 
 
 
@@ -28,6 +29,8 @@ function App() {
       <Route path='/dashboard/deposit'  component={Deposit} />
       <Route path='/dashboard/withdraw'  component={Withdraw} />
       <Route path='/dashboard/wire'  component={Wire} />
+      <Route path='/dashboard/history'  component={History} />
+
     </Router>
   );
 }

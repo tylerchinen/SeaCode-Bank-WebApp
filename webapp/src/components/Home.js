@@ -6,7 +6,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <Container fluid style ={{backgroundImage: `url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80)`,
-            height: '600px'}}>
+            height: '100vh', backgroundSize: 'cover'}}>
                 <Grid centered columns={2}>
                     <Grid.Column textAlign='center'>
                     <Icon style={{ marginTop: '100px' }} name='money bill alternate outline' size='huge' />
