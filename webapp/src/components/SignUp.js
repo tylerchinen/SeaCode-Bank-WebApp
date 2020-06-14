@@ -1,17 +1,56 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Segment, Header } from 'semantic-ui-react';
+import { Container, Segment, Header, Grid, Form, Button, Message, Divider } from 'semantic-ui-react';
 
 export default class Deposit extends React.Component {
-    render() {
-        return (
-            <Container textAlign='center' fluid style ={{backgroundImage: `url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80)`,
-            height: '100vh', backgroundSize: 'cover'}}>
-                <Header style={{paddingTop: '10px'}} as='h1'>Sign Up</Header>
-                <Segment style ={{marginLeft: '100px', marginRight: '100px'}}>
+  // eslint-disable-next-line class-methods-use-this
+  render() {
+    return (
+        <Container textAlign='center' fluid style={{
+          // eslint-disable-next-line max-len
+          backgroundImage: 'url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80)',
+          height: '100vh',
+          backgroundSize: 'cover',
+        }}>
+          <Header style={{ paddingTop: '10px' }} as='h1'>Sign Up</Header>
+          <Grid textAlign='center' style={{ height: '200vh' }}>
+            <Grid.Column style={{ maxWidth: 800 }}>
+              <Form size='large'>
+                <Segment>
+                  <Grid columns='equal'>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Form.Input focus placeholder='First Name'/>
+                      </Grid.Column>
+                      <Grid.Column>
+                        <Form.Input focus placeholder='Last Name'/>
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'/>
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Divider/>
+                      <Grid.Column>
+                        <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password'/>
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
 
+                  {/* eslint-disable-next-line max-len */}
+                  <Button as={NavLink} exact to="/dashboard" key='dashboard' primary color='teal' center size='large' paddingTop={'30 px'}>
+                    Create Account
+                  </Button>
                 </Segment>
-            </Container>
-        )
-    }
+              </Form>
+              <Message>
+                Already have an account? <a href='signin'>Sign In</a>
+              </Message>
+            </Grid.Column>
+          </Grid>
+        </Container>
+    );
+  }
 }
