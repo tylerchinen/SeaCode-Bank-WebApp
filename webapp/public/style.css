@@ -21,7 +21,7 @@ h2{
 }
 
 .footer-background {
-  background-color: dodgerblue;
+  background-image: linear-gradient(-90deg, lightseagreen, lightskyblue);
   color: white;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -42,3 +42,18 @@ h2{
 .link.item a:hover{
   color: red;
 }
+
+.ui.teal.fluid.button {
+  padding-top: 10px;
+}
+
+body {
+  background-color: lightsteelblue;
+}
+
+/*
+.login-page {
+  background-image: linear-gradient(-90deg, lightseagreen, lightskyblue);
+}
+*/
+
