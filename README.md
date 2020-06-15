@@ -38,11 +38,11 @@ SeaCode Bank Web App for ICS 427
 ## Updates: 6/7/20-6/14/20
 ### Progress
 - Added UI utilizing Semantic UI React
- - Home page
- - Dashboard (History, Deposit, Withdraw, Wire)
- - Nav bar
- - Sign in page
- - Sign up page
+  - Home page
+  - Dashboard (History, Deposit, Withdraw, Wire)
+  - Nav bar
+  - Sign in page
+  - Sign up page
 
 ### [Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
 
