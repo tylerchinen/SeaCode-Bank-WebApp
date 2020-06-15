@@ -1,9 +1,11 @@
 const express = require('express');
 const { body, check, validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 const router = express.Router();
 
+const saltRounds = 10;
 
 router.get('/', (req, res, next) => {
   res.status(200).json(
@@ -51,11 +53,20 @@ router.post('/register', [
           email: email,
         });
 
-        newUser.save((err) => {
+        bcrypt.hash(newUser.password, saltRounds, function(err, hash) {
           if (err) {
-            console.log('Error: Unable to save new user');
-            return res.status(422).json({ msg: 'Error: Server error'});
+            console.log('Error: Hashing Error');
+            throw err;
           }
+
+          newUser.password = hash;
+
+          newUser.save((err) => {
+            if (err) {
+              console.log('Error: Unable to save new user');
+              return res.status(422).json({ msg: 'Error: Server error'});
+            }
+          });
         });
 
         console.log(`Created user: ${username}`);
