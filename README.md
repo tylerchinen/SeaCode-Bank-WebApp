@@ -43,6 +43,7 @@ SeaCode Bank Web App for ICS 427
   - Nav bar
   - Sign in page
   - Sign up page
+- Add basic Rest APIs
   - Startup database seeding
   - User account creation endpoint, with input validation
   - Password encryption
