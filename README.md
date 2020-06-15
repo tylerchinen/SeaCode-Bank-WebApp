@@ -36,23 +36,29 @@ SeaCode Bank Web App for ICS 427
 - Next: User database
 
 ## Updates: 6/7/20-6/14/20
-## Progress
+### Progress
+- Added UI utilizing Semantic UI React
+ - Home page
+ - Dashboard (History, Deposit, Withdraw, Wire)
+ - Nav bar
+ - Sign in page
+ - Sign up page
 
+### [Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
 
-## [Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
+### Pending
+- 
 
-## Pending
-
-## Roles and Responsibilities
+### Roles and Responsibilities
 **Mirabela Medallon**
 - New completions: 
 - Worked on: Setting up the basic app code and mongodb atlas
 - Next: Front end and mockup pages
 
 **Tyler Chinen**
-- New completions: 
-- Worked on: Coding for Basic UI
-- Next: Coding for Basic UI
+- New completions: Completed UI for Sign in and Sign up pages.
+- Worked on: Coding for Basic UI, Sign in, and Sign up pages
+- Next: Valdiation for Sign in and Sign up forms, Public Disclosure
 
 **Wei Leong Hiew**
 - New completions: 
