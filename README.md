@@ -60,7 +60,7 @@ SeaCode Bank Web App for ICS 427
 
 ### Roles and Responsibilities
 **Mirabela Medallon**
-- New completions: 
+- New completions: Navbar, Homepage, and Dashboard
 - Worked on: Setting up the basic app code and mongodb atlas
 - Next: Front end and mockup pages
 
@@ -70,9 +70,9 @@ SeaCode Bank Web App for ICS 427
 - Next: Valdiation for Sign in and Sign up forms, Public Disclosure
 
 **Wei Leong Hiew**
-- New completions: 
+- New completions: Deposit function and web templates
 - Worked on: ESLint plugin with IntelliJ
-- Next: Deposit function
+- Next: Frontend integration
 
 **Patima Poochai**
 - New completions: Backend user database and API, Endpoints security
