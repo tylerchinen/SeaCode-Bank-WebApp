@@ -1,13 +1,13 @@
 # SeaCode-Bank-WebApp
 SeaCode Bank Web App for ICS 427
 
-##What is complete so far
+## What is complete so far
 - Setting up the basic app code and mongodb atlas
 - Coding for Basic UI
 - ESLint plugin with IntelliJ
 - Installation of React and Meteor plugins for ESLint
 
-##What is pending
+## What is pending
 - Front end and mockup pages
 - Coding for Basic UI
 - User database
@@ -19,47 +19,47 @@ SeaCode Bank Web App for ICS 427
 - Signup, Signin function
 - Download Bank Statement function
 
-###Mirabela Medallon
+### Mirabela Medallon
 - Worked on: Setting up the basic app code and mongodb atlas
 - Next: Front end and mockup pages
 
-###Tyler Chinen
+### Tyler Chinen
 - Worked on: Coding for Basic UI
 - Next: Coding for Basic UI
 
-###Wei Leong Hiew
+### Wei Leong Hiew
 - Worked on: ESLint plugin with IntelliJ
 - Next: Deposit function
 
-###Patima Poochai
+### Patima Poochai
 - Worked on: Installation of React and Meteor plugins for ESLint
 - Next: User database
 
-##Updates: 6/7/20-6/14/20
-##Progress
+## Updates: 6/7/20-6/14/20
+## Progress
 
 
-##[Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
+## [Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
 
-##Pending
+## Pending
 
-##Roles and Responsibilities
-###Mirabela Medallon
+## Roles and Responsibilities
+### Mirabela Medallon
 - New completions: 
 - Worked on: Setting up the basic app code and mongodb atlas
 - Next: Front end and mockup pages
 
-###Tyler Chinen
+### Tyler Chinen
 - New completions: 
 - Worked on: Coding for Basic UI
 - Next: Coding for Basic UI
 
-###Wei Leong Hiew
+### Wei Leong Hiew
 - New completions: 
 - Worked on: ESLint plugin with IntelliJ
 - Next: Deposit function
 
-###Patima Poochai
+### Patima Poochai
 - New completions: 
 - Worked on: Installation of React and Meteor plugins for ESLint
 - Next: User database
