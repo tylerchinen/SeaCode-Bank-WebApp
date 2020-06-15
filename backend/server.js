@@ -2,19 +2,19 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 // CONFIG
 const startup = require('./config/startup');
-
 // ROUTES
 const userRoute = require('./routes/user');
-
-require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ type: 'application/json' }));
+app.use(express.urlencoded({ extended: false }));
 
 // MONGO
 const devURI = 'mongodb://localhost:27017/mydb';
