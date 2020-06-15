@@ -43,11 +43,19 @@ SeaCode Bank Web App for ICS 427
   - Nav bar
   - Sign in page
   - Sign up page
+  - Startup database seeding
+  - User account creation endpoint, with input validation
+  - Password encryption
+  - User roles
 
 ### [Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
 
 ### Pending
-- 
+- Authentication using Passport
+- Backend balance checking endpoint
+- Admin API
+- Withdrwal, transfer API
+- Transaction validation and logging
 
 ### Roles and Responsibilities
 **Mirabela Medallon**
@@ -66,6 +74,6 @@ SeaCode Bank Web App for ICS 427
 - Next: Deposit function
 
 **Patima Poochai**
-- New completions: 
+- New completions: Backend user database and API, Endpoints security
 - Worked on: Installation of React and Meteor plugins for ESLint
-- Next: User database
+- Next: Authentication, access control
