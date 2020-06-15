@@ -1,10 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Segment, Header, Grid, Form, Button, Message, Divider } from 'semantic-ui-react';
+import { Container, Segment, Header, Grid, Form, Button, Message, Divider, Checkbox } from 'semantic-ui-react';
 
 export default class Deposit extends React.Component {
+  state = {
+    Agree: false
+  }
+
+  handleCheckboxChange = (e, { checked, name }) =>
+      this.setState({[name]: checked})
+
   // eslint-disable-next-line class-methods-use-this
   render() {
+    const {
+      Agree
+    } = this.state
     return (
         <Container textAlign='center' fluid style={{
           // eslint-disable-next-line max-len
@@ -39,6 +49,14 @@ export default class Deposit extends React.Component {
                     </Grid.Row>
                   </Grid>
 
+                  <Form.Group inline style={{marginTop: '10px'}}>
+                    <Form.Checkbox
+                        checked={Agree}
+                        label='I agree to the Terms and Conditions'
+                        name='Agree'
+                        onChange={this.handleCheckboxChange}
+                    /><a href='publicdisclosure'>(See Terms and Conditions)</a>
+                    </Form.Group>
                   {/* eslint-disable-next-line max-len */}
                   <Button as={NavLink} exact to="/dashboard" key='dashboard' primary color='teal' center size='large' paddingTop={'30 px'}>
                     Create Account
