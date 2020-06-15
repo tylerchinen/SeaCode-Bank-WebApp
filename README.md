@@ -43,6 +43,7 @@ SeaCode Bank Web App for ICS 427
   - Nav bar
   - Sign in page
   - Sign up page
+  - Withdraw page
 - Add basic Rest APIs
   - Startup database seeding
   - User account creation endpoint, with input validation
@@ -60,7 +61,7 @@ SeaCode Bank Web App for ICS 427
 
 ### Roles and Responsibilities
 **Mirabela Medallon**
-- New completions: 
+- New completions: UIs for: Dashboard page, Navbar, Home page, Withdraw page
 - Worked on: Setting up the basic app code and mongodb atlas
 - Next: Front end and mockup pages
 
