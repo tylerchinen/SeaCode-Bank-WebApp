@@ -3,6 +3,8 @@ const { body, check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const roles = require('../config/roleEnum');
+const passport = require('passport');
+
 const router = express.Router();
 
 const saltRounds = 10;
@@ -78,5 +80,9 @@ router.post('/register', [
     .catch((err) => console.log(err));
   }
 );
+
+router.get('/login', passport.authenticate('local'), (req, res) => {
+  return res.send();
+});
 
 module.exports = router;

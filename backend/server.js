@@ -1,6 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+
+// Passport config
+require('./config/passport')(passport);
 
 require('dotenv').config();
 
@@ -27,6 +32,17 @@ const connection = mongoose.connection; // eslint-disable-line
 connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
+
+// SESSION
+app.use(session({
+  secret: 'super secret',
+  resave: true,
+  saveUninitialized: true,
+}));
+
+// PASPORT MIDDLEWARE
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Seed database if there's no user
 startup();
