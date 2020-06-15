@@ -16,6 +16,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    required: true,
+  },
   ssn: String,
   bankAccountNumber: String,
   creditCardNumber: Number,

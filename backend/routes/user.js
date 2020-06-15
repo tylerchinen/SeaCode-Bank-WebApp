@@ -2,7 +2,7 @@ const express = require('express');
 const { body, check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-
+const roles = require('../config/roleEnum');
 const router = express.Router();
 
 const saltRounds = 10;
@@ -51,6 +51,7 @@ router.post('/register', [
           username: username,
           password: password,
           email: email,
+          role: roles.user,
         });
 
         bcrypt.hash(newUser.password, saltRounds, function(err, hash) {
