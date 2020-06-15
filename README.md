@@ -19,19 +19,19 @@ SeaCode Bank Web App for ICS 427
 - Signup, Signin function
 - Download Bank Statement function
 
-### Mirabela Medallon
+**Mirabela Medallon**
 - Worked on: Setting up the basic app code and mongodb atlas
 - Next: Front end and mockup pages
 
-### Tyler Chinen
+**Tyler Chinen**
 - Worked on: Coding for Basic UI
 - Next: Coding for Basic UI
 
-### Wei Leong Hiew
+**Wei Leong Hiew**
 - Worked on: ESLint plugin with IntelliJ
 - Next: Deposit function
 
-### Patima Poochai
+**Patima Poochai**
 - Worked on: Installation of React and Meteor plugins for ESLint
 - Next: User database
 
@@ -44,22 +44,22 @@ SeaCode Bank Web App for ICS 427
 ## Pending
 
 ## Roles and Responsibilities
-### Mirabela Medallon
+**Mirabela Medallon**
 - New completions: 
 - Worked on: Setting up the basic app code and mongodb atlas
 - Next: Front end and mockup pages
 
-### Tyler Chinen
+**Tyler Chinen**
 - New completions: 
 - Worked on: Coding for Basic UI
 - Next: Coding for Basic UI
 
-### Wei Leong Hiew
+**Wei Leong Hiew**
 - New completions: 
 - Worked on: ESLint plugin with IntelliJ
 - Next: Deposit function
 
-### Patima Poochai
+**Patima Poochai**
 - New completions: 
 - Worked on: Installation of React and Meteor plugins for ESLint
 - Next: User database
