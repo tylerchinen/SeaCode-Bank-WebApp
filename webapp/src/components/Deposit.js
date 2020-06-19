@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Segment, Header, Checkbox } from 'semantic-ui-react';
+import { Container, Segment, Header, Checkbox, Form } from 'semantic-ui-react';
 
 export default class Deposit extends React.Component {
     state = {}
