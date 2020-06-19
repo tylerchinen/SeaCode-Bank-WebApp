@@ -4,13 +4,12 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const passport = require('passport');
 
-// Passport config
-require('./config/passport')(passport);
-
 require('dotenv').config();
 
 // CONFIG
 const startup = require('./config/startup');
+// PASSPORT CONFIG
+require('./config/passport')(passport);
 // ROUTES
 const userRoute = require('./routes/user');
 
@@ -21,9 +20,9 @@ app.use(cors());
 app.use(express.json({ type: 'application/json' }));
 app.use(express.urlencoded({ extended: false }));
 
-// MONGO
-const devURI = 'mongodb://localhost:27017/mydb';
-const uri = process.env.ATLAS_URI;
+// MONGO CONNECTION
+const devURI = 'mongodb://localhost:27017/mydb'; // For local development
+const uri = process.env.ATLAS_URI; // Change this back on commits
 mongoose.connect(devURI, { useNewUrlParser: true, useCreateIndex: true });
 
 /* es lint asks for destructuring here, remove comment as necessary */
@@ -38,10 +37,14 @@ app.use(session({
   secret: 'super secret',
   resave: true,
   saveUninitialized: true,
+  cookie: {
+    httpOnly: 'true',
+    expires: new Date(Date.now + 60 * 60 * 1000), // 1 hour
+  },
 }));
 
 // PASPORT MIDDLEWARE
-app.use(passport.initialize());
+app.use(passport.initialize()); // sets up req.login()
 app.use(passport.session());
 
 // Seed database if there's no user
