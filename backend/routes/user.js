@@ -78,7 +78,7 @@ router.post('/register', [
           msg: `Created user: ${username}`});
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log('Error: ' + err));
   }
 );
 
@@ -121,7 +121,7 @@ router.get('/adminstatus', (req, res) => {
     User.findOne({ username: req.user.username })
       .then(
         (query) => {
-          console.log('Query of ' + req.user.username + 'has status of: ' + query);
+          console.log('Query of ' + req.user.username + ' has status of: ' + query.role);
           if (!query) {
             return res.status(401).send({msg: "Unable to find user"});
           }
@@ -132,7 +132,7 @@ router.get('/adminstatus', (req, res) => {
       )
       .catch(
         (err) => {
-          console.log(err);
+          console.log('Error: ' + err);
           return res.status(500).send({msg: "Error: Internal server error"});
         }
       );

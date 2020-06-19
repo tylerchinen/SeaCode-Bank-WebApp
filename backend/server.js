@@ -18,14 +18,14 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json({ type: 'application/json' }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // MONGO CONNECTION
 const devURI = 'mongodb://localhost:27017/mydb'; // For local development
 const uri = process.env.ATLAS_URI; // Change this back on commits
 console.log(process.env.ATLAS_URI);
-mongoose.connect(devURI, { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 
 /* es lint asks for destructuring here, remove comment as necessary */
 const connection = mongoose.connection; // eslint-disable-line
