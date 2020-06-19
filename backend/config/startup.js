@@ -15,6 +15,7 @@ const seedUser = () => {
           console.log(`Adding ${doc.username}`);
         });
       }
+      console.log('Done');
     })
     .catch((err) => console.log(err));
 };

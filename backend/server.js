@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 const devURI = 'mongodb://localhost:27017/mydb'; // For local development
 const uri = process.env.ATLAS_URI; // Change this back on commits
 console.log(process.env.ATLAS_URI);
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(devURI, { useNewUrlParser: true, useCreateIndex: true });
 
 /* es lint asks for destructuring here, remove comment as necessary */
 const connection = mongoose.connection; // eslint-disable-line

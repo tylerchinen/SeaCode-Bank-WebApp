@@ -8,6 +8,12 @@ const users = [
     email: 'john@gmail.com',
     role: roles.user,
   }),
+  new User({
+    username: 'admin',
+    password: '$2b$10$mQEgoJElbxPapmPx7HJFXexu9Ogko.qtecDr/IUaCxoFB56k//Y3m',
+    email: 'test@gmail.com',
+    role: roles.admin,
+  }),
 ];
 
 module.exports = users;
