@@ -6,8 +6,9 @@ const passport = require('passport');
 
 require('dotenv').config();
 
-// CONFIG
+// CONFIGS
 const startup = require('./config/startup');
+const secrets = require('./config/secrets');
 // PASSPORT CONFIG
 require('./config/passport')(passport);
 // ROUTES
@@ -23,7 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 // MONGO CONNECTION
 const devURI = 'mongodb://localhost:27017/mydb'; // For local development
 const uri = process.env.ATLAS_URI; // Change this back on commits
-mongoose.connect(devURI, { useNewUrlParser: true, useCreateIndex: true });
+console.log(process.env.ATLAS_URI);
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
 
 /* es lint asks for destructuring here, remove comment as necessary */
 const connection = mongoose.connection; // eslint-disable-line
@@ -34,7 +36,8 @@ connection.once('open', () => {
 
 // SESSION
 app.use(session({
-  secret: 'super secret',
+  // if this line gives you trouble, make your own secrets.js file in ./config
+  secret: secrets.sessionSecrets,
   resave: true,
   saveUninitialized: true,
   cookie: {
