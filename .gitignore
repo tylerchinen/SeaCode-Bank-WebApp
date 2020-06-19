@@ -11,3 +11,5 @@
 node_modules
 npm-debug.*
 
+# Secrets
+secrets.js
