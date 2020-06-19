@@ -23,7 +23,7 @@ export default class Deposit extends React.Component {
                         radio
                         label='Cash'
                         name='checkboxRadioGroup'
-                        value='this'
+                        value='cash'
                         checked={this.state.value === 'cash'}
                         onChange={this.handleChange}
                     />
@@ -31,9 +31,9 @@ export default class Deposit extends React.Component {
                     <Form.Field>
                     <Checkbox
                         radio
-                        label='A Check'
+                        label='Check'
                         name='checkboxRadioGroup'
-                        value='that'
+                        value='check'
                         checked={this.state.value === 'check'}
                         onChange={this.handleChange}
                     />
