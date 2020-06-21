@@ -28,32 +28,35 @@ Account registration route. Checks for:
 When the input is valid, creates the user in the User model
  */
 router.post('/register', [
-  body('username').notEmpty().bail().isString(),
-  body(['password', 'confirmPassword']).notEmpty().bail().isString(),
-  body('email').notEmpty().bail().isString().isEmail(),
+  body(['firstname', 'lastname']).notEmpty().bail().isString(),
+    body('accountnum').notEmpty().bail().isDecimal(),
+    body('email').notEmpty().bail().isString().isEmail(),
+    body('password').notEmpty().bail().isString(),
 ], (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
 
-  const { username, password, confirmPassword, email} = req.body;
+  const { firstname, lastname, accountnum, email, password} = req.body;
 
-  // Password doesn't matches
-  if (password !== confirmPassword) {
-    return res.status(400).json({ msg: 'Error: Password doesn\'t match'});
-  }
+  // Password doesn't matches, commented out due to frontend
+  // if (password !== confirmPassword) {
+  //   return res.status(400).json({ msg: 'Error: Password doesn\'t match'});
+  // }
 
   // This runs async, so any return after this function run before the return inside.
-  User.findOne({ username: username })
+  User.findOne({ accountnum: accountnum })
     .then((query) => {
       if (query) {
-        return res.status(400).json({ msg: 'Error: Duplicate username'});
+        return res.status(400).json({ msg: 'Error: Duplicate accountnum'});
       } else {
         const newUser = new User({
-          username: username,
-          password: password,
+          firstname: firstname,
+          lastname: lastname,
+          accountnum: accountnum,
           email: email,
+          password: password,
           role: roles.user,
         });
 
@@ -73,9 +76,9 @@ router.post('/register', [
           });
         });
 
-        console.log(`Created user: ${username}`);
+        console.log(`Created user: ${firstname}`);
         return res.status(201).send({
-          msg: `Created user: ${username}`});
+          msg: `Created user: ${firstname}`});
       }
     })
     .catch((err) => console.log('Error: ' + err));
@@ -86,7 +89,7 @@ router.post('/register', [
 LOG IN
  */
 router.post('/login', passport.authenticate('local', { session: true }), (req, res, next) => {
-  console.log(req.user.username + ' logged in');
+  console.log(req.user.accountnum + ' logged in');
   return res.status(200).send({msg: "Authenticated"});
 });
 
@@ -95,7 +98,7 @@ LOG OUT
  */
 router.get('/logout', function(req, res) {
   if (req.isAuthenticated()) {
-    console.log(req.user.username + ' logged out');
+    console.log(req.user.accountnum + ' logged out');
   }
   req.logout();
   return res.status(200).send({msg: "Logged out"});
@@ -108,7 +111,7 @@ SESSION CHECK
  */
 router.get('/sessioncheck', (req, res) => {
   if (req.isAuthenticated()) {
-    console.log(req.user.username + ' requests authentication status: ' + req.isAuthenticated());
+    console.log(req.user.accountnum + ' requests authentication status: ' + req.isAuthenticated());
     return res.status(200).send({msg: "User is logged in"});
   }
 
@@ -117,11 +120,11 @@ router.get('/sessioncheck', (req, res) => {
 
 router.get('/adminstatus', (req, res) => {
   if (req.isAuthenticated()) {
-    console.log(req.user.username + ' is requesting admin status');
-    User.findOne({ username: req.user.username })
+    console.log(req.user.accountnum + ' is requesting admin status');
+    User.findOne({ accountnum: req.user.accountnum })
       .then(
         (query) => {
-          console.log('Query of ' + req.user.username + ' has status of: ' + query.role);
+          console.log('Query of ' + req.user.accountnum + ' has status of: ' + query.role);
           if (!query) {
             return res.status(401).send({msg: "Unable to find user"});
           }
