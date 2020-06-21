@@ -17,6 +17,6 @@ export default class Home extends React.Component {
                     </Grid.Column>
                 </Grid>
             </Container>
-        )
+        );
     }
 }
