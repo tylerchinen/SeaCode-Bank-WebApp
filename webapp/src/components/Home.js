@@ -22,7 +22,7 @@ export default class Home extends React.Component {
             </Grid.Column>
           </Grid>
           {/* eslint-disable-next-line max-len */}
-          <CookieConsent debug={true} location="bottom" style={{ background: 'lightslategray' }} buttonStyle={{ background: 'teal', color: 'white', fontSize: '13px', fontWeight: 'bold' }} >This website uses cookies to enhance the user experience.</CookieConsent>
+          <CookieConsent location="bottom" style={{ background: 'lightslategray' }} buttonStyle={{ background: 'teal', color: 'white', fontSize: '13px', fontWeight: 'bold' }} >This website uses cookies to enhance the user experience.</CookieConsent>
         </Container>
     );
   }
