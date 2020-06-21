@@ -38,6 +38,11 @@ export default class Deposit extends React.Component {
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
+                        <Form.Input focus placeholder='Account Number'/>
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column>
                         <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'/>
                       </Grid.Column>
                     </Grid.Row>
