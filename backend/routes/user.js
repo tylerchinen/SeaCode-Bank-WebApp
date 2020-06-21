@@ -46,10 +46,10 @@ router.post('/register', [
   // }
 
   // This runs async, so any return after this function run before the return inside.
-  User.findOne({ accountnum: accountnum })
+  User.findOne({ email: email })
     .then((query) => {
       if (query) {
-        return res.status(400).json({ msg: 'Error: Duplicate accountnum'});
+        return res.status(400).json({ msg: 'Error: Duplicate email'});
       } else {
         const newUser = new User({
           firstname: firstname,
@@ -76,9 +76,9 @@ router.post('/register', [
           });
         });
 
-        console.log(`Created user: ${firstname}`);
+        console.log(`Created user: ${email}`);
         return res.status(201).send({
-          msg: `Created user: ${firstname}`});
+          msg: `Created user: ${email}`});
       }
     })
     .catch((err) => console.log('Error: ' + err));
@@ -89,7 +89,7 @@ router.post('/register', [
 LOG IN
  */
 router.post('/login', passport.authenticate('local', { session: true }), (req, res, next) => {
-  console.log(req.user.accountnum + ' logged in');
+  console.log(req.user.email + ' logged in');
   return res.status(200).send({msg: "Authenticated"});
 });
 
@@ -98,7 +98,7 @@ LOG OUT
  */
 router.get('/logout', function(req, res) {
   if (req.isAuthenticated()) {
-    console.log(req.user.accountnum + ' logged out');
+    console.log(req.user.email + ' logged out');
   }
   req.logout();
   return res.status(200).send({msg: "Logged out"});
@@ -111,7 +111,7 @@ SESSION CHECK
  */
 router.get('/sessioncheck', (req, res) => {
   if (req.isAuthenticated()) {
-    console.log(req.user.accountnum + ' requests authentication status: ' + req.isAuthenticated());
+    console.log(req.user.email + ' requests authentication status: ' + req.isAuthenticated());
     return res.status(200).send({msg: "User is logged in"});
   }
 
@@ -120,11 +120,11 @@ router.get('/sessioncheck', (req, res) => {
 
 router.get('/adminstatus', (req, res) => {
   if (req.isAuthenticated()) {
-    console.log(req.user.accountnum + ' is requesting admin status');
-    User.findOne({ accountnum: req.user.accountnum })
+    console.log(req.user.email + ' is requesting admin status');
+    User.findOne({ email: req.user.email })
       .then(
         (query) => {
-          console.log('Query of ' + req.user.accountnum + ' has status of: ' + query.role);
+          console.log('Query of ' + req.user.email + ' has status of: ' + query.role);
           if (!query) {
             return res.status(401).send({msg: "Unable to find user"});
           }

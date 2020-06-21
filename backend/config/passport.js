@@ -6,12 +6,12 @@ const User = require('../models/user');
 
 module.exports = function (passport) {
   passport.use(
-    new LocalStrategy({usernameField: 'accountnum'}, (accountnum, password, done) => {
-      User.findOne({ accountnum: accountnum })
+    new LocalStrategy({usernameField: 'email'}, (email, password, done) => {
+      User.findOne({ email: email })
         .then((user) => {
           // Find user
           if (!user) {
-            console.log(`${accountnum} failed to login`);
+            console.log(`${email} failed to login`);
             return done(null, false, { message: "Unable to find user" });
           }
 
