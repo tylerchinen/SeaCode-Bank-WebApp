@@ -1,21 +1,103 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+//import { connect } from 'react-redux';
 import { Container, Segment, Header, Grid, Form, Button, Message, Divider, Modal, Image } from 'semantic-ui-react';
+import Redirect from 'react-router-dom/es/Redirect';
+//import { createUser } from '../users';
 
-export default class Deposit extends React.Component {
+export default class SignUp extends React.Component {
   state = {
-    Agree: false
+    open: false,
+    Agree: false,
+    accountNumber: '',
+    password: '',
+    confirmPassword: '',
+    email: '',
+    accountNumberError: false,
+    emailError: false,
+    passwordError: false,
+    confirmPasswordError: false,
+    formError: false,
+    createUserError: false
   }
 
   handleCheckboxChange = (e, { checked, name }) =>
       this.setState({ [name]: checked })
 
+  open = () => this.setState({ open: true})
+  close = () => this.setState({open: false})
+
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let error = false;
+
+    if (this.state.email === '') {
+      this.setState({ emailError: true });
+      error = true;
+    } else {
+      this.setState({ emailError: false });
+    }
+
+    if (this.state.password.length < 5) {
+      this.setState({ passwordError: true });
+      error = true;
+    } else {
+      this.setState({ passwordError: false });
+    }
+
+    if (this.state.confirmPassword.length < 5) {
+      this.setState({ confirmPasswordError: true });
+      error = true;
+    } else {
+      this.setState({ confirmPasswordError: false });
+    }
+
+    if (this.state.password !== this.state.confirmPassword) {
+      this.setState({ passwordMatchError: true });
+      error = true;
+    } else {
+      this.setState({ passwordMatchError: false });
+    }
+
+    this.setState({ formError: false });
+
+    const user = {
+      accountNumber: this.state.accountNumber,
+      email: this.state.email,
+      password: this.state.password,
+      password_confirmation: this.state.confirmPassword,
+    };
+    /*
+            this.props.createUser(user)
+                .then((res) => {
+                  if (!res.payload) {
+                    this.setState({
+                      createUserError: true
+                    });
+                  }
+                });
+
+            if (this.state.loggedIn) {
+              this.setState({ modalOpen: false });
+            } */
+  }
+/*
+  handleOpen = () => this.setState({ modalOpen: true })
+  handleClose = () => this.setState({ modalOpen: false })
+*/
   // eslint-disable-next-line class-methods-use-this
   render() {
     const {
-      Agree
+      Agree, open
     } = this.state
-    return (
+
+    return !this.props.loggedIn ? (
         <Container textAlign='center' fluid style={{
           // eslint-disable-next-line max-len
           backgroundImage: 'url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80)',
@@ -25,7 +107,15 @@ export default class Deposit extends React.Component {
           <Header style={{ paddingTop: '10px' }} as='h1'>Sign Up</Header>
           <Grid textAlign='center' style={{ height: '200vh' }}>
             <Grid.Column style={{ maxWidth: 800 }}>
-              <Form size='large'>
+              <Form size='large' onSubmit={(event) => {
+                this.handleSubmit(event);
+              }} error={this.state.createUserError || this.state.formError}>
+                {this.state.createUserError ?
+                    <Message error header="Account Already Exists"
+                             content="An account already exists for thsi email address, please log in or confirm your email address is correct."
+                    />
+                    : null}
+
                 <Segment>
                   <Grid columns='equal'>
                     <Grid.Row>
@@ -38,18 +128,53 @@ export default class Deposit extends React.Component {
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Form.Input focus placeholder='Account Number'/>
+                        <Form.Input focus
+                                    placeholder='Account Number'
+                                    name='accountNumber'
+                                    value={this.state.accountNumber}
+                                    onChange={this.handleInputChange}
+                                    error={this.state.AccountNumberError}
+                        />
                       </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'/>
+                        <Form.Input fluid icon='user'
+                                    iconPosition='left'
+                                    placeholder='E-mail address'
+                                    name='email'
+                                    value={this.state.email}
+                                    onChange={this.handleInputChange}
+                                    error={this.state.emailError}
+                        />
                       </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                       <Divider/>
                       <Grid.Column>
-                        <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password'/>
+                        <Form.Input fluid icon='lock'
+                                    iconPosition='left'
+                                    placeholder='Password'
+                                    type='password'
+                                    name='password'
+                                    value={this.state.password}
+                                    onChange={this.handleInputChange}
+                                    error={this.state.passwordError || this.state.passwordMatchError}
+                        />
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Divider/>
+                      <Grid.Column>
+                        <Form.Input fluid icon='lock'
+                                    iconPosition='left'
+                                    placeholder='Confirm Password'
+                                    type='password'
+                                    name='confirmPassword'
+                                    value={this.state.confirmPassword}
+                                    onChange={this.handleInputChange}
+                                    error={this.state.confirmPasswordError || this.state.passwordMatchError}
+                        />
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
@@ -62,7 +187,11 @@ export default class Deposit extends React.Component {
                         onChange={this.handleCheckboxChange}
                     />
                     <Grid.Row>
-                      <Modal trigger={<Button basic>View Terms and Conditions</Button>} closeIcon>
+                      <Modal open={open}
+                             onOpen={this.open}
+                             onClose={this.close}
+                             trigger={<Button basic>View Terms and Conditions</Button>}
+                             closeIcon >
                         <Modal.Content image>
                           <Image wrapped size='large' src='https://static.thenounproject.com/png/454567-200.png'/>
                           <Modal.Description>
@@ -485,6 +614,7 @@ export default class Deposit extends React.Component {
                             <p>United States</p>
 
                             <h5>These terms of use were created using Termly’s Terms and Conditions Generator.</h5>
+                            <Button floated='right' icon='close' content='Close' onClick={this.close} />
                           </Modal.Description>
                         </Modal.Content>
                       </Modal>
@@ -492,10 +622,20 @@ export default class Deposit extends React.Component {
 
                   </Form.Group>
                   {/* eslint-disable-next-line max-len */}
-                  <Button as={NavLink} exact to="/dashboard" key='dashboard' primary color='teal' center size='large'
-                          paddingTop={'30 px'}>
+                  <Form.Button primary
+                               color='teal'
+                               center
+                               size='large'
+                               paddingTop={'30 px'}
+                               type='submit'
+                               disabled={!this.state.email
+                               || !this.state.accountNumber
+                               || !this.state.password
+                               || !this.state.confirmPassword
+                               }
+                  >
                     Create Account
-                  </Button>
+                  </Form.Button>
                 </Segment>
               </Form>
               <Message>
@@ -504,6 +644,11 @@ export default class Deposit extends React.Component {
             </Grid.Column>
           </Grid>
         </Container>
-    );
+    )
+        :
+        <Redirect to='/https://localhost:5000/api/users/register'/>;
   }
 }
+
+const mapStateToProps = state => ({ loggedIn:state.user.loggedIn});
+//export default connect(mapStateToProps, { createUser })(SignUp);
