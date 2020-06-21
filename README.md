@@ -35,7 +35,7 @@ SeaCode Bank Web App for ICS 427
 - Worked on: Installation of React and Meteor plugins for ESLint
 - Next: User database
 
-## Updates: 6/7/20-6/14/20
+## Part II Updates: 6/7/20-6/14/20
 ### Progress
 - Added UI utilizing Semantic UI React
   - Home page
@@ -79,3 +79,32 @@ SeaCode Bank Web App for ICS 427
 - New completions: Backend user database and API, Endpoints security
 - Worked on: Installation of React and Meteor plugins for ESLint
 - Next: Authentication, access control
+
+
+## Part III Updates: 6/15/20-6/21/20
+### Progress
+- 
+### Pending
+- 
+### Roles and Responsibilities
+**Mirabela Medallon**
+- New completions: UIs for: Dashboard page, Navbar, Home page, Withdraw page
+- Worked on: Setting up the basic app code and mongodb atlas
+- Next: Front end and mockup pages
+
+**Tyler Chinen**
+- New completions: Completed UI for Sign in and Sign up pages.
+- Worked on: Coding for Basic UI, Sign in, and Sign up pages
+- Next: Valdiation for Sign in and Sign up forms, Public Disclosure
+
+**Wei Leong Hiew**
+- New completions: Deposit function and web templates
+- Worked on: ESLint plugin with IntelliJ
+- Next: Frontend integration
+
+**Patima Poochai**
+- New completions: Authentication, protected routing , access control
+- Worked on: Installation of React and Meteor plugins for ESLint Backend, user database, and API Endpoints security
+- Next: 
+
+### [Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
