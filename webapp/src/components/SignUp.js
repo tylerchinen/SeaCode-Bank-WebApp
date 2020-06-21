@@ -33,8 +33,8 @@ export default class SignUp extends React.Component {
     });
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     let error = false;
 
     if (this.state.email === '') {
