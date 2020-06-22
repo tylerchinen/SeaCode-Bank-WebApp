@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Segment, Header, Checkbox, Form } from 'semantic-ui-react';
+import { Container, Segment, Header, Checkbox, Form, Button, Input } from 'semantic-ui-react';
 
 export default class Deposit extends React.Component {
     state = {}
@@ -39,6 +39,9 @@ export default class Deposit extends React.Component {
                     />
                     </Form.Field>
                 </Form>
+                <Header style={{paddingTop: '10px'}} as='h3'>Step 2: Amount</Header>
+                <Input focus placeholder='Enter an amount' />
+                <Button>Confirm</Button>
                 </Segment>
             </Container>
         )
