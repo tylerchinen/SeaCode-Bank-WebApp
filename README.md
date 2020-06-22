@@ -56,7 +56,7 @@ SeaCode Bank Web App for ICS 427
 - Authentication using Passport
 - Backend balance checking endpoint
 - Admin API
-- Withdrwal, transfer API
+- Withdrawl, transfer API
 - Transaction validation and logging
 
 ### Roles and Responsibilities
@@ -93,9 +93,9 @@ SeaCode Bank Web App for ICS 427
 - Next: Front end and mockup pages
 
 **Tyler Chinen**
-- New completions: Completed UI for Sign in and Sign up pages.
-- Worked on: Coding for Basic UI, Sign in, and Sign up pages
-- Next: Valdiation for Sign in and Sign up forms, Public Disclosure
+- New completions: Converting Sign-up validations from Bootstrap to Semantic-ui-react, cookies popup, Terms and Conditions
+- Worked on: Added additional features to Sign-up (converted validations, added terms and conditions, changed formatting)
+- Next: Backend integration with frontend
 
 **Wei Leong Hiew**
 - New completions: Deposit function and web templates
