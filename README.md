@@ -89,9 +89,13 @@ SeaCode Bank Web App for ICS 427
 - Authentication
 - Protected API endpoints
 - Transfer API
-- 
+- Most UI is done
 ### Pending
-- 
+- Withdraw functionality
+- Deposit Functionality
+- Wire Functionality
+- Account History functionality
+
 ### Roles and Responsibilities
 **Mirabela Medallon**
 - New completions: UIs for: Deposit, Wire Funds, Account History
