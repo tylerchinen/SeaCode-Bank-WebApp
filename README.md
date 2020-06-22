@@ -88,9 +88,8 @@ SeaCode Bank Web App for ICS 427
 - 
 ### Roles and Responsibilities
 **Mirabela Medallon**
-- New completions: UIs for: Dashboard page, Navbar, Home page, Withdraw page
-- Worked on: Setting up the basic app code and mongodb atlas
-- Next: Front end and mockup pages
+- New completions: UIs for: Deposit, Wire Funds, Account History
+- Next: UI Testing, Connecting Backend to Frontend, Proper Functionality
 
 **Tyler Chinen**
 - New completions: Converting Sign-up validations from Bootstrap to Semantic-ui-react, cookies popup, Terms and Conditions
