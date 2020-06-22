@@ -58,6 +58,7 @@ router.post('/register', [
           email: email,
           password: password,
           role: roles.user,
+          balance: 0,
         });
 
         bcrypt.hash(newUser.password, saltRounds, function(err, hash) {
@@ -112,7 +113,10 @@ SESSION CHECK
 router.get('/sessioncheck', (req, res) => {
   if (req.isAuthenticated()) {
     console.log(req.user.email + ' requests authentication status: ' + req.isAuthenticated());
-    return res.status(200).send({msg: "User is logged in"});
+    return res.status(200).send({
+      email: req.user.email,
+      msg: "User is logged in",
+    });
   }
 
   return res.status(401).send({msg: "User is not logged in"});
@@ -130,7 +134,10 @@ router.get('/adminstatus', (req, res) => {
           }
 
           const adminStatus = (query.role === roles.admin) ? true : false;
-          return res.status(200).send({adminStatus: adminStatus});
+          return res.status(200).send({
+            email: req.user.email,
+            adminStatus: adminStatus
+          });
         }
       )
       .catch(
@@ -142,6 +149,86 @@ router.get('/adminstatus', (req, res) => {
   } else {
     return res.status(401).send({msg: "Unauthorized"});
   }
+});
+
+router.use('/protected', function(req, res, next) {
+  if (req.isAuthenticated()) {
+    console.log(req.user.email + ' is accessing a protected resource');
+    next();
+  } else {
+    console.log('Unauthorized user at '+ req.ip + ' tried to access protected resource');
+    return res.status(401).send({msg: "Not logged in"});
+  }
+});
+
+router.get('/protected/balance',
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    User.findOne({ email: req.user.email})
+      .then((user => {
+        if (!user) {
+          return res.status(404).send({msg: "User not found"});
+        }
+
+        return res.status(200).send({
+          email: user.email,
+          balance: user.balance,
+        });
+      }))
+      .catch((err) => {
+        console.log('Error: ' + err);
+        return res.status(500).end();
+      });
+});
+
+router.post('/protected/wire', [
+  body('secondPartyAccountnum').notEmpty().isNumeric(),
+  body('amount').notEmpty().isNumeric(),
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  // User.findOne({ accountnum: req.body.secondPartyAccountnum})
+  //   .then((query) => {
+  //     if (!query) {
+  //       return res.status(500).send({msg: "Error: Invalid account number"});
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log('Error: ' + err);
+  //     return res.status(500).end();
+  //   });
+
+  User.findOne({ accountnum: req.user.accountnum})
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({msg: "Error: User not found"});
+      }
+
+      User.wire(user, req.body.secondPartyAccountnum, req.body.amount, (state) =>{
+        switch(state) {
+          case -2:
+            return res.status(400).send({msg: "Error: Insufficient Fund"});
+            break;
+          case -1:
+            return res.status(400).send({msg: "Error: Invalid Account Number"});
+            break;
+          case 0:
+            return res.status(200).send({msg: "Transfered"});
+        }
+      });
+      }
+    )
+    .catch((err) => {
+      console.log('Error: ' + err);
+      return res.status(500).end();
+    });
 });
 
 module.exports = router;
