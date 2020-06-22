@@ -83,6 +83,12 @@ SeaCode Bank Web App for ICS 427
 
 ## Part III Updates: 6/15/20-6/21/20
 ### Progress
+- Terms and conditions
+- Cookie popup
+- Sign up/in integration
+- Authentication
+- Protected API endpoints
+- Transfer API
 - 
 ### Pending
 - 
@@ -102,8 +108,8 @@ SeaCode Bank Web App for ICS 427
 - Next: Frontend integration
 
 **Patima Poochai**
-- New completions: Authentication, protected routing , access control
+- New completions: Authentication, protected routing, access control, funds transfer, account balance
 - Worked on: Installation of React and Meteor plugins for ESLint Backend, user database, and API Endpoints security
-- Next: 
+- Next: Deposit validation, integration
 
 ### [Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
