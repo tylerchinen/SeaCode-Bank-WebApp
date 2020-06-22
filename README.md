@@ -83,9 +83,11 @@ SeaCode Bank Web App for ICS 427
 
 ## Part III Updates: 6/15/20-6/21/20
 ### Progress
-- 
+- Continued develping UIs and integrating the frontend and backend
+- Conducted multiple versions of testing
 ### Pending
-- 
+- Continual testing as we are developing and integrating the front and back end of the app
+- Continue to integrate and debug issues that arise as we integrate the front and back end
 ### Roles and Responsibilities
 **Mirabela Medallon**
 - New completions: UIs for: Dashboard page, Navbar, Home page, Withdraw page
