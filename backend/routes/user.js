@@ -115,6 +115,8 @@ router.get('/sessioncheck', (req, res) => {
     console.log(req.user.email + ' requests authentication status: ' + req.isAuthenticated());
     return res.status(200).send({
       email: req.user.email,
+      firstname: req.user.firstname,
+      lastname: req.user.lastname,
       msg: "User is logged in",
     });
   }
