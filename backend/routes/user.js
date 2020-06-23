@@ -200,7 +200,7 @@ router.post('/protected/wire', [
         return res.status(404).send({msg: "Error: User not found"});
       }
 
-      User.wire(user, req.body.secondPartyAccountnum, req.body.amount, (state) =>{
+      User.wire(user, req.body.secondPartyAccountnum, req.body.amount, { logThis: true }, (state) =>{
         switch(state) {
           case -2:
             return res.status(400).send({msg: "Error: Insufficient Fund"});
@@ -234,7 +234,7 @@ router.post('/protected/deposit', [
         return res.status(404).send({msg: "Error: User not found"});
       }
 
-      user.deposit(req.body.amount, (state) => {
+      user.deposit(req.body.amount, { logThis: true }, (state) => {
         if (state) {
           return res.status(200).send({msg: `Deposited ${req.body.amount}`});
         } else {
@@ -262,7 +262,7 @@ router.post('/protected/withdraw', [
         return res.status(404).send({msg: "Error: User not found"});
       }
 
-      user.withdraw(req.body.amount, (state) => {
+      user.withdraw(req.body.amount, {logThis: true}, (state) => {
         if (state) {
           return res.status(200).send({msg: `Withdrew ${req.body.amount}`});
         } else {

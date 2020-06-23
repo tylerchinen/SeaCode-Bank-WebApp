@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const roles = require('../config/roleEnum');
+const { TransactionType, TransactionTo } = require('../config/transactionEnum');
 
 const { Schema } = mongoose;
 
@@ -37,10 +38,18 @@ const UserSchema = new Schema({
   ssn: String,
   bankAccountNumber: String,
   creditCardNumber: Number,
-  transactionHistory: Array,
+  transactionHistory: [
+    {
+      transactionType: { type: String, required: true },
+      recipient: { type: String, required: true },
+      amount: { type: Number, required: true },
+      date: { type: Date, required: true },
+      from: { type: String, require: false },
+    },
+  ],
 });
 
-UserSchema.methods.deposit = function (amount, callback) {
+UserSchema.methods.deposit = function (amount, options, callback) {
   if (this.role !== roles.admin) {
     if (amount > roles.userAmount) {
       if (callback) callback(false);
@@ -49,12 +58,30 @@ UserSchema.methods.deposit = function (amount, callback) {
   }
 
   this.balance = parseFloat(this.balance) + parseFloat(amount);
+
+  if (options.logThis) {
+    const transactionLog = {
+      transactionType: TransactionType.deposit,
+      recipient: TransactionTo.self,
+      amount: amount,
+      date: Date.now(),
+    };
+
+    this.transactionHistory.push(transactionLog);
+    console.log(this.transactionHistory);
+  }
+
+  if (options.noSave) {
+    if (callback) callback(true);
+    return true;
+  }
+
   this.save();
   if (callback) callback(true);
   return true;
 };
 
-UserSchema.methods.withdraw = function (amount, callback) {
+UserSchema.methods.withdraw = function (amount, options, callback) {
   if (this.balance < amount) {
     if (callback) callback(false);
     return false;
@@ -65,29 +92,71 @@ UserSchema.methods.withdraw = function (amount, callback) {
   }
 
   this.balance = parseFloat(this.balance) - parseFloat(amount);
+
+  if (options.logThis) {
+    const transactionLog = {
+      transactionType: TransactionType.withdraw,
+      recipient: TransactionTo.self,
+      amount: amount,
+      date: Date.now(),
+    };
+
+    this.transactionHistory.push(transactionLog);
+    console.log(this.transactionHistory);
+  }
+
+  if (options.noSave) {
+    if (callback) callback(true);
+    return true;
+  }
+
   this.save();
   if (callback) callback(true);
   return true;
 };
 
-UserSchema.statics.wire = function (user, accountnum2, amount, callback) {
+UserSchema.statics.wire = function (user, accountnum2, amount, options, callback) {
   this.findOne({ accountnum: accountnum2 })
     .then((user2) => {
       if (!user2) {
-        console.log('Transfer error between ' + user.accountnum + ' and unknown account: ' + accountnum2);
+        console.log(`Transfer error between ${user.accountnum} and unknown account: ${accountnum2}`);
         return callback(-1);
       }
       if (user2.accountnum === user.accountnum) {
-        console.log('Self-Transfer error between ' + user.accountnum + ' and ' + accountnum2);
+        console.log(`Self-Transfer error between ${user.accountnum} and ${accountnum2}`);
         return callback(-1);
       }
-      if (!user.withdraw(amount)) {
-        console.log('Transfer error between ' + user.accountnum + ' and ' + accountnum2);
+      if (!user.withdraw(amount, { noSave: true })) {
+        console.log(`Transfer error between ${user.accountnum} and ${accountnum2}`);
         return callback(-2);
       }
-      user2.deposit(amount);
+      user2.deposit(amount, { noSave: true });
 
-      console.log('Account: ' + user.accountnum + ' transfer $' + amount + ' to Account: ' + accountnum2);
+      if (options.logThis) {
+        const transactionLogSender = {
+          transactionType: TransactionType.wire,
+          recipient: user2.accountnum,
+          amount: amount,
+          date: Date.now(),
+          from: TransactionTo.self,
+        };
+
+        const transactionLogReceiver = {
+          transactionType: TransactionType.wire,
+          recipient: TransactionTo.self,
+          amount: amount,
+          date: Date.now(),
+          from: user.accountnum,
+        };
+
+        user.transactionHistory.push(transactionLogSender);
+        user2.transactionHistory.push(transactionLogReceiver);
+        user.save();
+        user2.save();
+        console.log(user.transactionHistory);
+      }
+
+      console.log(`Account: ${user.accountnum} transfer $${amount} to Account: ${accountnum2}`);
       return callback(0);
     })
     .catch((err) => {
