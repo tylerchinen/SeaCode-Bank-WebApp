@@ -49,6 +49,12 @@ const UserSchema = new Schema({
   ],
 });
 
+/**
+ * Withdraw from the current account
+ *  @param amount The amount to withdraw (no less than balance or less than 0)
+ *  @param options noSave or logThis
+ *  @param callback Callback function to indicate status (true = completed, false = error)
+ */
 UserSchema.methods.deposit = function (amount, options, callback) {
   if (this.role !== roles.admin) {
     if (amount > roles.userAmount) {
@@ -68,7 +74,7 @@ UserSchema.methods.deposit = function (amount, options, callback) {
     };
 
     this.transactionHistory.push(transactionLog);
-    console.log(this.transactionHistory);
+    // console.log(this.transactionHistory);
   }
 
   if (options.noSave) {
@@ -78,9 +84,16 @@ UserSchema.methods.deposit = function (amount, options, callback) {
 
   this.save();
   if (callback) callback(true);
+  console.log(this.email + ' deposited ' + amount);
   return true;
 };
 
+/**
+ * Withdraw from the current account
+ *  @param amount The amount to withdraw (no less than balance or less than 0)
+ *  @param options noSave or logThis
+ *  @param callback Callback function to indicate status (true = completed, false = error)
+ */
 UserSchema.methods.withdraw = function (amount, options, callback) {
   if (this.balance < amount) {
     if (callback) callback(false);
@@ -102,7 +115,7 @@ UserSchema.methods.withdraw = function (amount, options, callback) {
     };
 
     this.transactionHistory.push(transactionLog);
-    console.log(this.transactionHistory);
+    // console.log(this.transactionHistory);
   }
 
   if (options.noSave) {
@@ -112,9 +125,17 @@ UserSchema.methods.withdraw = function (amount, options, callback) {
 
   this.save();
   if (callback) callback(true);
+  console.log(this.email + ' withdrew ' + amount);
   return true;
 };
 
+/**
+ * Wire funds from one account to another
+ *  @param user User instance of the current user
+ *  @param accountnum2 Account number of person wiring to
+ *  @param options noSave or logThis
+ *  @param callback Callback function to indicate status (0 = completed, -1/-2 = error)
+ */
 UserSchema.statics.wire = function (user, accountnum2, amount, options, callback) {
   this.findOne({ accountnum: accountnum2 })
     .then((user2) => {
@@ -153,7 +174,7 @@ UserSchema.statics.wire = function (user, accountnum2, amount, options, callback
         user2.transactionHistory.push(transactionLogReceiver);
         user.save();
         user2.save();
-        console.log(user.transactionHistory);
+        // console.log(user.transactionHistory);
       }
 
       console.log(`Account: ${user.accountnum} transfer $${amount} to Account: ${accountnum2}`);

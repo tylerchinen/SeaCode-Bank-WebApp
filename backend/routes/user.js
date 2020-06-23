@@ -276,4 +276,22 @@ router.post('/protected/withdraw', [
     });
 });
 
+router.get('/protected/transactionHistory', (req, res) => {
+  User.findOne({ email: req.user.email})
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({msg: "Error: User not found"});
+      }
+
+      return res.status(200).send({
+        email: user.email,
+        transactionHistory: user.transactionHistory,
+      });
+    })
+    .catch((err) => {
+      console.log('Error: ' + err);
+      return res.status(500).end();
+    });
+});
+
 module.exports = router;
