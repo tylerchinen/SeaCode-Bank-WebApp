@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const roles = require('../config/roleEnum');
 
 const { Schema } = mongoose;
 
@@ -39,17 +40,33 @@ const UserSchema = new Schema({
   transactionHistory: Array,
 });
 
-UserSchema.methods.deposit = function (amount) {
+UserSchema.methods.deposit = function (amount, callback) {
+  if (this.role !== roles.admin) {
+    if (amount > roles.userAmount) {
+      if (callback) callback(false);
+      return false;
+    }
+  }
+
   this.balance = parseFloat(this.balance) + parseFloat(amount);
+  this.save();
+  if (callback) callback(true);
   return true;
 };
 
-UserSchema.methods.withdraw = function (amount) {
+UserSchema.methods.withdraw = function (amount, callback) {
   if (this.balance < amount) {
+    if (callback) callback(false);
+    return false;
+  }
+  if (this.balance <= 0) {
+    if (callback) callback(false);
     return false;
   }
 
   this.balance = parseFloat(this.balance) - parseFloat(amount);
+  this.save();
+  if (callback) callback(true);
   return true;
 };
 
@@ -70,8 +87,6 @@ UserSchema.statics.wire = function (user, accountnum2, amount, callback) {
       }
       user2.deposit(amount);
 
-      user.save();
-      user2.save();
       console.log('Account: ' + user.accountnum + ' transfer $' + amount + ' to Account: ' + accountnum2);
       return callback(0);
     })

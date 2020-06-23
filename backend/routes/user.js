@@ -194,18 +194,7 @@ router.post('/protected/wire', [
     return res.status(422).json({ errors: errors.array() });
   }
 
-  // User.findOne({ accountnum: req.body.secondPartyAccountnum})
-  //   .then((query) => {
-  //     if (!query) {
-  //       return res.status(500).send({msg: "Error: Invalid account number"});
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.log('Error: ' + err);
-  //     return res.status(500).end();
-  //   });
-
-  User.findOne({ accountnum: req.user.accountnum})
+  User.findOne({ email: req.user.email})
     .then((user) => {
       if (!user) {
         return res.status(404).send({msg: "Error: User not found"});
@@ -225,6 +214,62 @@ router.post('/protected/wire', [
       });
       }
     )
+    .catch((err) => {
+      console.log('Error: ' + err);
+      return res.status(500).end();
+    });
+});
+
+router.post('/protected/deposit', [
+    body('amount').notEmpty().isNumeric(),
+  ], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  User.findOne({ email: req.user.email})
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({msg: "Error: User not found"});
+      }
+
+      user.deposit(req.body.amount, (state) => {
+        if (state) {
+          return res.status(200).send({msg: `Deposited ${req.body.amount}`});
+        } else {
+          return res.status(400).send({msg: `Error: Invalid amount of ${req.body.amount}`});
+        }
+      });
+    })
+    .catch((err) => {
+      console.log('Error: ' + err);
+      return res.status(500).end();
+    });
+});
+
+router.post('/protected/withdraw', [
+  body('amount').notEmpty().isNumeric(),
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  User.findOne({ email: req.user.email})
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({msg: "Error: User not found"});
+      }
+
+      user.withdraw(req.body.amount, (state) => {
+        if (state) {
+          return res.status(200).send({msg: `Withdrew ${req.body.amount}`});
+        } else {
+          return res.status(400).send({msg: `Error: Insufficient amount of ${req.body.amount}`});
+        }
+      });
+    })
     .catch((err) => {
       console.log('Error: ' + err);
       return res.status(500).end();
