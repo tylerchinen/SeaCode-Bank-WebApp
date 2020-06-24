@@ -1,8 +1,116 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Segment, Header, Grid, Form, Button, Message, Divider, Modal, Image } from 'semantic-ui-react';
+import { Container, Segment, Header, Grid, Form, Message, Divider, Modal, Image } from 'semantic-ui-react';
+import Button from 'react-bootstrap/Button';
+import DialogWindow from './DialogWindow';
+import CustomTextField from './CustomTextField';
 
-export default class Deposit extends React.Component {
+export default class SignUp extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstname: '',
+      lastname: '',
+      accountnum: '',
+      email: '',
+      password: '',
+    };
+    this.textFieldsHandler = this.textFieldsHandler.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.closeWindow = this.closeWindow.bind(this);
+  }
+
+  closeWindow(){
+    this.setState({
+      show : false
+    });
+
+    console.log('You want to close this dialog box.');
+  }
+
+  handleSubmit(event) {
+    // user information
+    const signupUser = {
+      firstname: this.state.firstname,
+      lastname: this.state.lastname,
+      accountnum: this.state.accountnum,
+      password: this.state.password,
+      email: this.state.email,
+    };
+
+
+
+
+    fetch('http://localhost:5000/api/users/register', {
+      method: 'POST',
+      body: JSON.stringify(signupUser),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+      if (response.ok) {
+        // if everything is working
+        this.setState({
+          show: true,
+          title: 'Success!!',
+          content: 'Account Created.',
+        });
+        console.log('Successfully Signed Up');
+      } else {
+        // something went wrong
+        console.log(JSON.stringify(signupUser));
+        this.setState({
+          show: true,
+          title: 'Error!!',
+          content: 'Problems encountered when signing up, try it again.',
+        });
+        console.log('Problems encountered when siging up');
+      }
+    });
+
+    event.preventDefault();
+    console.log('You want to create a new sign up');
+  }
+
+  textFieldsHandler(event) {
+    if (event.target.name === 'firstname') {
+      this.setState({
+        firstname: event.target.value,
+      });
+
+      console.log(`User Name: ${this.state.firstname}`);
+    }
+    if (event.target.name === 'lastname') {
+      this.setState({
+        lastname: event.target.value,
+      });
+
+      console.log(`User Name: ${this.state.lastname}`);
+    }
+    if (event.target.name === 'accountnum') {
+      this.setState({
+        accountnum: event.target.value,
+      });
+
+      console.log(`Account Number: ${this.state.accountnum}`);
+    }
+    if (event.target.name === 'password') {
+      this.setState({
+        password: event.target.value,
+      });
+
+      console.log(`Password: ${this.state.password}`);
+    }
+    if (event.target.name === 'email') {
+      this.setState({
+        email: event.target.value,
+      });
+
+      console.log(`Email: ${this.state.email}`);
+    }
+  }
+
   state = {
     Agree: false
   }
@@ -25,31 +133,55 @@ export default class Deposit extends React.Component {
           <Header style={{ paddingTop: '10px' }} as='h1'>Sign Up</Header>
           <Grid textAlign='center' style={{ height: '200vh' }}>
             <Grid.Column style={{ maxWidth: 800 }}>
-              <Form size='large'>
+              <Form size='large' onSubmit={this.handleSubmit} >
                 <Segment>
                   <Grid columns='equal'>
                     <Grid.Row>
                       <Grid.Column>
-                        <Form.Input focus placeholder='First Name'/>
+                        <CustomTextField
+                            name='firstname'
+                            placeholder='First Name'
+                            val={this.state.firstname}
+                            inputHandler={this.textFieldsHandler}/>
                       </Grid.Column>
                       <Grid.Column>
-                        <Form.Input focus placeholder='Last Name'/>
+                        <CustomTextField
+                            placeholder='Last Name'
+                            name='lastname'
+                            val={this.state.lastname}
+                            inputHandler={this.textFieldsHandler}/>
                       </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Form.Input focus placeholder='Account Number'/>
+                        <CustomTextField
+                            placeholder='Account Number'
+                            name='accountnum'
+                            val={this.state.accountnum}
+                            inputHandler={this.textFieldsHandler}/>
                       </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'/>
+                        <CustomTextField
+                            customId='email'
+                            placeholder='Email'
+                            name='email'
+                            val={this.state.email}
+                            inputHandler={this.textFieldsHandler}
+                        />
                       </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                       <Divider/>
                       <Grid.Column>
-                        <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password'/>
+                        <CustomTextField
+                            customId='password'
+                            placeholder='Password'
+                            name='password'
+                            val={this.state.password}
+                            inputHandler={this.textFieldsHandler}
+                        />
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
@@ -62,7 +194,7 @@ export default class Deposit extends React.Component {
                         onChange={this.handleCheckboxChange}
                     />
                     <Grid.Row>
-                      <Modal trigger={<Button basic>View Terms and Conditions</Button>} closeIcon>
+                      <Modal trigger={<Button variant='outline-info'>View Terms and Conditions</Button>} closeIcon>
                         <Modal.Content image>
                           <Image wrapped size='large' src='https://static.thenounproject.com/png/454567-200.png'/>
                           <Modal.Description>
@@ -492,10 +624,18 @@ export default class Deposit extends React.Component {
 
                   </Form.Group>
                   {/* eslint-disable-next-line max-len */}
-                  <Button as={NavLink} exact to="/dashboard" key='dashboard' primary color='teal' center size='large'
-                          paddingTop={'30 px'}>
+
+                  <Button
+                      type='submit'
+                      variant = 'primary'
+                      size = 'lg'>
                     Create Account
                   </Button>
+                  <DialogWindow
+                      show={this.state.show}
+                      title={this.state.title}
+                      content={this.state.content}
+                      closeHandler={this.closeWindow}/>
                 </Segment>
               </Form>
               <Message>

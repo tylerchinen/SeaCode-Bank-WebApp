@@ -10,6 +10,8 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.0",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-bootstrap-form": "^0.1.4-beta6",
     "react-cookie-consent": "^5.1.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
