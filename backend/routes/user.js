@@ -176,6 +176,8 @@ router.get('/protected/balance',
 
         return res.status(200).send({
           email: user.email,
+          firstname: user.firstname,
+          lastname: user.lastname,
           balance: user.balance,
         });
       }))
