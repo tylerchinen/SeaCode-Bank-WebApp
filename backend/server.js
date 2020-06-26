@@ -8,7 +8,6 @@ require('dotenv').config();
 
 // CONFIGS
 const startup = require('./config/startup');
-const secrets = require('./config/secrets');
 // PASSPORT CONFIG
 require('./config/passport')(passport);
 // ROUTES
@@ -18,7 +17,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3000', // change this
   credentials: true,
 };
 
@@ -42,7 +41,7 @@ connection.once('open', () => {
 // SESSION
 app.use(session({
   // if this line gives you trouble, make your own secrets.js file in ./config
-  secret: secrets.sessionSecrets,
+  secret: 'change this when you are running this',
   resave: true,
   saveUninitialized: true,
   cookie: {
