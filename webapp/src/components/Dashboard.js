@@ -3,7 +3,26 @@ import { NavLink } from 'react-router-dom';
 import { Container, Grid, Header, Icon, Segment, Button, Statistic } from 'semantic-ui-react';
 
 export default class Home extends React.Component {
+  loginCheck() {
+    fetch('http://localhost:5000/api/users/sessioncheck', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    }).then((response) => {
+      if (response.ok) {
+        console.log('Logged in');
+      } else {
+        response.json().then((data) => {
+          console.log(data);
+        });
+      }
+    });
+  }
+
     render() {
+    this.loginCheck();
         return (
             <Container textAlign='center' fluid style ={{backgroundImage: `url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80)`,
             height: '100vh', backgroundSize: 'cover'}}>
