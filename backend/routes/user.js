@@ -173,7 +173,7 @@ router.get('/protected/balance',
     User.findOne({ email: req.user.email})
       .then((user => {
         if (!user) {
-          return res.status(404).send({msg: "User not found"});
+          return res.status(401).send({msg: "Error: Not logged in"});
         }
 
         console.log(user.email + ' accessed their balance');
@@ -192,7 +192,7 @@ router.get('/protected/balance',
 });
 
 router.post('/protected/wire', [
-  body('secondPartyAccountnum').notEmpty().isNumeric(),
+  body('secondPartyEmail').notEmpty().isEmail(),
   body('amount').notEmpty().isNumeric(),
 ], (req, res) => {
   const errors = validationResult(req);
@@ -203,16 +203,22 @@ router.post('/protected/wire', [
   User.findOne({ email: req.user.email})
     .then((user) => {
       if (!user) {
-        return res.status(404).send({msg: "Error: User not found"});
+        return res.status(401).send({msg: "Error: Not logged in"});
       }
 
-      User.wire(user, req.body.secondPartyAccountnum, req.body.amount, { logThis: true }, (state) =>{
+      User.wire(user, req.body.secondPartyEmail, req.body.amount, { logThis: true }, (state) =>{
         switch(state) {
+          case -3:
+            console.log('Wire error with code: ' + state);
+            return res.status(400).send({msg: "Error: Amount above restricted limit"});
+            break;
           case -2:
+            console.log('Wire error with code: ' + state);
             return res.status(400).send({msg: "Error: Insufficient Fund"});
             break;
           case -1:
-            return res.status(400).send({msg: "Error: Invalid Account Number"});
+            console.log('Wire error with code: ' + state);
+            return res.status(400).send({msg: "Error: Invalid Email"});
             break;
           case 0:
             return res.status(200).send({msg: "Transfered"});

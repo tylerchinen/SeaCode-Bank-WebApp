@@ -132,23 +132,26 @@ UserSchema.methods.withdraw = function (amount, options, callback) {
 /**
  * Wire funds from one account to another
  *  @param user User instance of the current user
- *  @param accountnum2 Account number of person wiring to
+ *  @param email2 Account number of person wiring to
  *  @param options noSave or logThis
  *  @param callback Callback function to indicate status (0 = completed, -1/-2 = error)
  */
-UserSchema.statics.wire = function (user, accountnum2, amount, options, callback) {
-  this.findOne({ accountnum: accountnum2 })
+UserSchema.statics.wire = function (user, email2, amount, options, callback) {
+  this.findOne({ email: email2 })
     .then((user2) => {
       if (!user2) {
-        console.log(`Transfer error between ${user.accountnum} and unknown account: ${accountnum2}`);
+        console.log(`Transfer error between ${user.accountnum} and unknown account: ${email2}`);
         return callback(-1);
       }
-      if (user2.accountnum === user.accountnum) {
-        console.log(`Self-Transfer error between ${user.accountnum} and ${accountnum2}`);
+      if (user2.email === user.email) {
+        console.log(`Self-Transfer error between ${user.accountnum} and ${email2}`);
         return callback(-1);
+      }
+      if (amount > roles.userAmount) {
+        return callback(-3);
       }
       if (!user.withdraw(amount, { noSave: true })) {
-        console.log(`Transfer error between ${user.accountnum} and ${accountnum2}`);
+        console.log(`Transfer error between ${user.accountnum} and ${email2}`);
         return callback(-2);
       }
       user2.deposit(amount, { noSave: true });
@@ -177,7 +180,7 @@ UserSchema.statics.wire = function (user, accountnum2, amount, options, callback
         // console.log(user.transactionHistory);
       }
 
-      console.log(`Account: ${user.accountnum} transfer $${amount} to Account: ${accountnum2}`);
+      console.log(`Account: ${user.accountnum} transfer $${amount} to Account: ${email2}`);
       return callback(0);
     })
     .catch((err) => {
