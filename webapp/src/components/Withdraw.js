@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Segment, Header, Input, Modal, Button, Icon, Message, Loader } from 'semantic-ui-react';
+import { Container, Segment, Header, Input, Modal, Button, Icon, Message, Loader, Dimmer } from 'semantic-ui-react';
 
 export default class Withdraw extends React.Component {
   constructor(props) {
@@ -11,8 +11,30 @@ export default class Withdraw extends React.Component {
       submitError: false,
       success: false,
       lastRequest: 0,
-      loading: false,
+      withdrawLoading: false,
+      sessionLoading: true,
+      loggedIn: false,
     }
+    this.loginCheck();
+  }
+
+  loginCheck() {
+    fetch('http://localhost:5000/api/users/sessioncheck', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    }).then((response) => {
+        if (response.ok) {
+          this.setState({ loggedIn: true });
+        } else {
+          this.setState({ loggedIn: false });
+        }
+
+      this.setState({ sessionLoading: false });
+      }
+    );
   }
 
   /** Update the form controls each time the user interacts with them. */
@@ -26,7 +48,7 @@ export default class Withdraw extends React.Component {
     const amount  = this.state.amount;
     this.setState({
       submitError: false,
-      loading: true,
+      withdrawLoading: true,
     });
     fetch('http://localhost:5000/api/users/protected/withdraw', {
       method: 'POST',
@@ -48,14 +70,13 @@ export default class Withdraw extends React.Component {
         }
         this.setState({
           modalOpen: false,
-          loading: false,
+          withdrawLoading: false,
         });
       }
     );
   };
 
-  render() {
-    console.log(this.state);
+  renderContent() {
     return (
       <Container textAlign='center' fluid style={{
         backgroundImage: `url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80)`,
@@ -76,7 +97,7 @@ export default class Withdraw extends React.Component {
               <p>
                 Proceed to withdraw ${this.state.amount} from your account?
               </p>
-              <Loader size='large' disabled={!this.state.loading}/>
+              <Loader size='large' disabled={!this.state.withdrawLoading}/>
             </Modal.Content>
             <Modal.Actions>
               <Button onClick={this.handleClose} basic color='red' inverted>
@@ -92,5 +113,26 @@ export default class Withdraw extends React.Component {
         <Message compact positive hidden={!this.state.success}> Withdrew ${this.state.lastRequest} </Message>
       </Container>
     );
+  }
+
+  render() {
+    if (this.state.sessionLoading) {
+      return (
+        <Dimmer active inverted>
+          <Loader inverted>Loading</Loader>
+        </Dimmer>
+      );
+    }
+
+    return (this.state.loggedIn)
+      ? this.renderContent()
+      : <Container textAlign='center' fluid style={{
+        backgroundImage: `url(https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&w=1000&q=80)`,
+        height: '100vh',
+        backgroundSize: 'cover',
+      }}>
+        <Header as='h1' content='Login Required'/>
+        <Header as='h2' content='Please log in'/>
+      </Container>;
   }
 }
