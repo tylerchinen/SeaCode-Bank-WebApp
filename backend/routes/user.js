@@ -176,6 +176,8 @@ router.get('/protected/balance',
           return res.status(404).send({msg: "User not found"});
         }
 
+        console.log(user.email + ' accessed their balance');
+
         return res.status(200).send({
           email: user.email,
           firstname: user.firstname,
@@ -286,6 +288,8 @@ router.get('/protected/transactionHistory', (req, res) => {
       if (!user) {
         return res.status(404).send({msg: "Error: User not found"});
       }
+
+      console.log(user.email + ' accessed their transaction history');
 
       return res.status(200).send({
         email: user.email,
