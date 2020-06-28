@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const roles = require('../config/roleEnum');
 const passport = require('passport');
+const paginate = require('express-paginate');
 
 const router = express.Router();
 
@@ -243,7 +244,7 @@ router.post('/protected/deposit', [
   User.findOne({ email: req.user.email})
     .then((user) => {
       if (!user) {
-        return res.status(404).send({msg: "Error: User not found"});
+        return res.status(401).send({msg: "Error: Not logged in"});
       }
 
       user.deposit(req.body.amount, { logThis: true }, (state) => {
@@ -271,7 +272,7 @@ router.post('/protected/withdraw', [
   User.findOne({ email: req.user.email})
     .then((user) => {
       if (!user) {
-        return res.status(404).send({msg: "Error: User not found"});
+        return res.status(401).send({msg: "Error: Not logged in"});
       }
 
       user.withdraw(req.body.amount, {logThis: true}, (state) => {
@@ -288,18 +289,51 @@ router.post('/protected/withdraw', [
     });
 });
 
-router.get('/protected/transactionHistory', (req, res) => {
-  User.findOne({ email: req.user.email})
+router.post('/protected/transactionHistory', [
+  body('currentPage').notEmpty().isNumeric(),
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  // assuming that currentPage starts at 1
+  if (req.body.currentPage < 1) {
+    return res.status(400).json({ errors: 'Current page is less than 1' });
+  }
+
+  User.findOne({ email: req.user.email })
     .then((user) => {
       if (!user) {
-        return res.status(404).send({msg: "Error: User not found"});
+        return res.status(401).send({msg: "Error: Not logged in"});
       }
 
+      const indextAtZero = req.body.currentPage - 1;
+      const limit = 7;
+      const pageCount = Math.ceil((user.transactionHistory.length / limit));
+      const hasMore = req.body.currentPage < pageCount;
+      // assuming that currentPage starts at 1
+      if (req.body.currentPage > pageCount) {
+        return res.status(400).json({
+          errors: 'Current page is above the the total page',
+          hasMore: hasMore,
+          totalPage: pageCount,
+        });
+      }
+      const skip = (parseInt(indextAtZero) * limit);
+      const offset = ((parseInt(indextAtZero) + 1) * limit);
+
+      const paginatedHistory = user.transactionHistory.slice(skip, offset);
+
       console.log(user.email + ' accessed their transaction history');
+      // console.log(user.transactionHistory.length);
+      // console.log('Total page: ' + pageCount + ' Has more: ' + hasMore + ' From-To: ' + skip + ' - ' + offset);
 
       return res.status(200).send({
         email: user.email,
-        transactionHistory: user.transactionHistory,
+        hasMore: hasMore,
+        totalPage: pageCount,
+        transactionHistory: paginatedHistory,
       });
     })
     .catch((err) => {
