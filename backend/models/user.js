@@ -159,7 +159,7 @@ UserSchema.statics.wire = function (user, email2, amount, options, callback) {
       if (options.logThis) {
         const transactionLogSender = {
           transactionType: TransactionType.wire,
-          recipient: user2.accountnum,
+          recipient: user2.email,
           amount: amount,
           date: Date.now(),
           from: TransactionTo.self,
@@ -170,7 +170,7 @@ UserSchema.statics.wire = function (user, email2, amount, options, callback) {
           recipient: TransactionTo.self,
           amount: amount,
           date: Date.now(),
-          from: user.accountnum,
+          from: user.email,
         };
 
         user.transactionHistory.push(transactionLogSender);
