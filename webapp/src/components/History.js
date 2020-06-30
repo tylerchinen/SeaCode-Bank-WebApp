@@ -94,7 +94,7 @@ export default class History extends React.Component {
 
             return (
               <Card style={{ marginTop: '-2px' }} fluid color={color}
-                    header={headerString} meta={Date(item.date).toLocaleString()}/>
+                    header={headerString} meta={new Date(item.date).toLocaleString()}/>
             );
           })
         }
