@@ -117,3 +117,26 @@ SeaCode Bank Web App for ICS 427
 - Next: Deposit validation, integration
 
 ### [Link to our repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
+
+## Part IV Updates/Final: 6/22/20-7/3/20
+
+### Technical Notes
+Specifications for use, how to install, etc.
+
+### Roles and Responsibilites
+**Mirabela Medallon**
+- Worked on:
+
+**Tyler Chinen**
+- Worked on: Integrating the back end to the front end for the Sign up page, Created the Wiki Page.
+
+**Wei Leong Hiew**
+- Worked on:
+
+**Patima Poochai**
+- Worked on:
+
+### [Link to our Final Repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
+### [Link to the Final Project Documentation File Within the Repository]()
+### [Link to the Release Version of our Program]()
+### [Link to our Wiki](https://tylerchinen.github.io/seabank.github.io/)
