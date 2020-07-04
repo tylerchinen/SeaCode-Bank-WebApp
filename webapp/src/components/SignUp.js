@@ -17,18 +17,17 @@ export default class Deposit extends React.Component {
 
   submit = () => {
     const { firstname, lastname, accountnum, email, password} = this.state;
-    const signupUser = { firstname, lastname, accountnum, email, password };
     this.setState({ loginError: false});
     fetch('http://localhost:5000/api/users/register', {
       method: 'POST',
-      body: JSON.stringify(signupUser),
+      body: JSON.stringify({ firstname: firstname, lastname:lastname, accountnum:accountnum, email:email, password:password }),
         headers: {
           'Content-Type': 'application/json',
         },
       credentials: 'include',
       }).then((response) => {
         if (response.ok) {
-          this.props.history.push('/dashboard');
+          this.props.history.push('/signin');
         } else {
           this.setState({ loginError: true });
         }
