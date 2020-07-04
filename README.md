@@ -179,21 +179,22 @@ To run our application you will need to have an IDE downloaded that is compatibl
 
 ### Brief Closing Thoughts
 Thoughts on the outcome of our program looking back at our work including: the challanges, surprises, important achievements we are proud of, dissappointments, disclaimers/caveats.
+- Most of the challanges that we faced were encountered while integrating the front and back end of our program together, we also found it particularly challanging to implement new features after we had the front and and back end integrated. 
 
 ### Roles and Responsibilites
 **Mirabela Medallon**
-- Worked on:
+- Worked on: Integration with front and back end for sign in, sign up, deposit, withdraw, and wire transfer. Also implemented front end error notifications for all categories within the dashboard. 
 
 **Tyler Chinen**
-- Worked on: Integrating the back end to the front end for the Sign up page, Created the Wiki Page.
+- Worked on: Integrating the back end to the front end for the Sign up page, Created the Wiki Page, contributed to Release report - Certified Release & Archive Report.
 
 **Wei Leong Hiew**
-- Worked on:
+- Worked on: Integration with front and back end for sign up. Release report - Certified Release & Archive Report
 
 **Patima Poochai**
-- Worked on:
+- Worked on: Contributed to integration of front and back end for sign in, sign up, account history, deposit and withdraw as well as implementing logout, In the Release report - Incident Response Plan and Final Security Review.
 
 ### [Link to our Final Repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
-### [Link to the Final Project Documentation File Within the Repository]()
+### [Link to the Final Project Documentation File in the Repo]()
 ### [Link to the Release Version of our Program]()
 ### [Link to our Wiki](https://tylerchinen.github.io/seabank.github.io/)
