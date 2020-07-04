@@ -123,6 +123,9 @@ SeaCode Bank Web App for ICS 427
 ### Technical Notes
 Specifications for use, how to install, etc.
 
+### Brief Closing Thoughts
+Thoughts on the outcome of our program looking back at our work including: the challanges, surprises, important achievements we are proud of, dissappointments, disclaimers/caveats.
+
 ### Roles and Responsibilites
 **Mirabela Medallon**
 - Worked on:
