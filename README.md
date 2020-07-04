@@ -195,6 +195,6 @@ Thoughts on the outcome of our program looking back at our work including: the c
 - Worked on: Contributed to integration of front and back end for sign in, sign up, account history, deposit and withdraw as well as implementing logout, In the Release report - Incident Response Plan and Final Security Review.
 
 ### [Link to our Final Repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
-### [Link to the Final Project Documentation File in the Repo]()
+### [Link to the Final Project Documentation File in the Repo](https://github.com/tylerchinen/SeaCode-Bank-WebApp/blob/master/README.md)
 ### [Link to the Release Version of our Program]()
 ### [Link to our Wiki](https://tylerchinen.github.io/seabank.github.io/)
