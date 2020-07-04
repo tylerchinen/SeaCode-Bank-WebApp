@@ -9,7 +9,7 @@ export default class Deposit extends React.Component {
     accountnum: 0,
     email: '',
     password: '',
-    Agree: false,
+    Agree: true,
     redirectToReferer: false,
     loginError: false,
   }

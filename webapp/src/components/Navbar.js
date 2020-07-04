@@ -66,9 +66,9 @@ export default class Navbar extends React.Component {
           <Menu style={{ paddingBottom: '15px' }} attached="top" borderless inverted>
           <Menu.Item as={NavLink} exact to="/" key='home'>Home</Menu.Item>
           <Menu.Item as={NavLink} exact to="/dashboard" key='dashboard'>Dashboard</Menu.Item>
-          <Menu.Item position="right">
-          <Menu.Item position="right" text="Log out" as={NavLink} exact to="/"  onClick={this.submit} key='dashboard'>Log Out</Menu.Item>
-          </Menu.Item>
+          
+          <Menu.Item position="right" text="Log out" as={NavLink} exact to="/"  onClick={this.submit} key='logout'>Log Out</Menu.Item>
+        
       </Menu>
         )
     }
@@ -94,7 +94,7 @@ export default class Navbar extends React.Component {
                 <Dropdown.Item icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>
             </Dropdown.Menu>
             </Dropdown>
-            <Menu.Item position="right" text="Log out"  onClick={this.submit} key='dashboard'>Log Out</Menu.Item>
+            <Menu.Item position="right" text="Log out" as={NavLink} exact to="/"   onClick={this.submit} key='logout'>Log Out</Menu.Item>
 
         </Menu.Item>
       </Menu>
