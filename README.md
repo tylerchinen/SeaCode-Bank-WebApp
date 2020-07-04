@@ -174,7 +174,7 @@ To run our application you will need to have an IDE downloaded that is compatibl
 6. Once again, within the terminal in the IDE that you have chosen you will now need to add another terminal tab by using the *'+'* button (both are similar in either IntelliJ or Visual Studio. Then you will need to navigate into the *backend* folder by using the ```cd backend``` command (this will open the backend of our application).
    - Then you will be need to run ```npm install``` again and after this completes you will need to run ```npm start```
    - Once this completes the terminal should prompt you stating that the *localhost:3000* is busy, select 'y' to allow the application to run on another host number.
-   - You should now have our application up and running - Happy Banking!
+   - You should now have our application up and running and can then login with the email: ```jim@gmail.com``` and password: ```changeme``` - Happy Banking!
 
 
 ### Brief Closing Thoughts
