@@ -4,17 +4,48 @@ import { Container, Segment, Header, Grid, Form, Button, Message, Divider, Modal
 
 export default class Deposit extends React.Component {
   state = {
-    Agree: false
+    firstname: '',
+    lastname: '',
+    accountnum: 0,
+    email: '',
+    password: '',
+    Agree: false,
+    redirectToReferer: false,
+    loginError: false,
   }
 
+
+  submit = () => {
+    const { firstname, lastname, accountnum, email, password} = this.state;
+    const signupUser = { firstname, lastname, accountnum, email, password };
+    this.setState({ loginError: false});
+    fetch('http://localhost:5000/api/users/register', {
+      method: 'POST',
+      body: JSON.stringify(signupUser),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      credentials: 'include',
+      }).then((response) => {
+        if (response.ok) {
+          this.props.history.push('/dashboard');
+        } else {
+          this.setState({ loginError: true });
+        }
+      }
+    );
+  }
+  
   handleCheckboxChange = (e, { checked, name }) =>
       this.setState({ [name]: checked })
 
+      handleChange = (e, { name, value }) => {
+        this.setState({ [name]: value });
+      }
+
   // eslint-disable-next-line class-methods-use-this
   render() {
-    const {
-      Agree
-    } = this.state
+    const { Agree } = this.state
     return (
         <Container textAlign='center' fluid style={{
           // eslint-disable-next-line max-len
@@ -25,31 +56,31 @@ export default class Deposit extends React.Component {
           <Header style={{ paddingTop: '10px' }} as='h1'>Sign Up</Header>
           <Grid textAlign='center' style={{ height: '200vh' }}>
             <Grid.Column style={{ maxWidth: 800 }}>
-              <Form size='large'>
+              <Form onSubmit={this.submit} size='large'>
                 <Segment>
                   <Grid columns='equal'>
                     <Grid.Row>
                       <Grid.Column>
-                        <Form.Input focus placeholder='First Name'/>
+                        <Form.Input focus onChange={this.handleChange} name='firstname' placeholder='First Name'/>
                       </Grid.Column>
                       <Grid.Column>
-                        <Form.Input focus placeholder='Last Name'/>
-                      </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                      <Grid.Column>
-                        <Form.Input focus placeholder='Account Number'/>
+                        <Form.Input focus onChange={this.handleChange} name='lastname' placeholder='Last Name'/>
                       </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                       <Grid.Column>
-                        <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'/>
+                        <Form.Input focus onChange={this.handleChange} name='accountnum' placeholder='Account Number'/>
+                      </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                      <Grid.Column>
+                        <Form.Input fluid onChange={this.handleChange} name='email' icon='user' iconPosition='left' placeholder='E-mail address'/>
                       </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                       <Divider/>
                       <Grid.Column>
-                        <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password'/>
+                        <Form.Input fluid onChange={this.handleChange} name='password' icon='lock' iconPosition='left' placeholder='Password' type='password'/>
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>

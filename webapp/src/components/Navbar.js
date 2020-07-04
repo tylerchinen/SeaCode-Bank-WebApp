@@ -10,9 +10,28 @@ export default class Navbar extends React.Component {
           loggedIn: false,
           firstname: '',
           lastname: '',
-          balance: '',
           logoutError: false,
         }
+        this.loginCheck();
+      }
+
+      loginCheck() {
+        fetch('http://localhost:5000/api/users/sessioncheck', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }).then((response) => {
+            if (response.ok) {
+              this.setState({ loggedIn: true });
+            } else {
+              this.setState({ loggedIn: false });
+            }
+    
+          this.setState({ sessionLoading: false });
+          }
+        );
       }
 
       errorDisplay() {
@@ -33,7 +52,6 @@ export default class Navbar extends React.Component {
           method: 'GET',
           }).then((response) => {
             if (response.ok) {
-              this.props.history.push('/');
             } else {
               this.setState({ logoutError: true });
             }
@@ -43,28 +61,37 @@ export default class Navbar extends React.Component {
 
     renderContent() {
         return (
-            <Menu style={{ paddingBottom: '15px' }} attached="top" borderless inverted>
-                <Menu.Item as={NavLink} exact to="/" key='home'>Home</Menu.Item>
-                <Menu.Item as={NavLink} exact to="/dashboard" key='dashboard'>Dashboard</Menu.Item>
-                <Menu.Item position="right">
-                <Menu.Item position="right" text="Log out" onItemClick={this.submit} key='dashboard'>Log Out</Menu.Item>
-                </Menu.Item>
-            </Menu>
+          <Menu style={{ paddingBottom: '15px' }} attached="top" borderless inverted>
+            <Menu.Item as={NavLink} exact to="/" key='home'>Home</Menu.Item>
+            <Menu.Item as={NavLink} exact to="/dashboard" key='dashboard'>Dashboard</Menu.Item>
+            <Menu.Item position="right">
+                <Dropdown text="Login" pointing="top right" icon={'user'}>
+                <Dropdown.Menu>
+                    <Dropdown.Item icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
+                    <Dropdown.Item icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>
+                </Dropdown.Menu>
+                </Dropdown>
+            </Menu.Item>
+          </Menu>
         )
     }
     render() {
+
+      if (this.state.sessionLoading) {
+        return (
+          <Dimmer active inverted>
+            <Loader inverted>Loading</Loader>
+          </Dimmer>
+        );
+      }
+
         return (this.state.loggedin) ? this.renderContent() 
         :   <Menu style={{ paddingBottom: '15px' }} attached="top" borderless inverted>
-                <Menu.Item as={NavLink} exact to="/" key='home'>Home</Menu.Item>
-                <Menu.Item as={NavLink} exact to="/dashboard" key='dashboard'>Dashboard</Menu.Item>
-                <Menu.Item position="right">
-                    <Dropdown text="Login" pointing="top right" icon={'user'}>
-                    <Dropdown.Menu>
-                        <Dropdown.Item icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
-                        <Dropdown.Item icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>
-                    </Dropdown.Menu>
-                    </Dropdown>
-                </Menu.Item>
-            </Menu>
+        <Menu.Item as={NavLink} exact to="/" key='home'>Home</Menu.Item>
+        <Menu.Item as={NavLink} exact to="/dashboard" key='dashboard'>Dashboard</Menu.Item>
+        <Menu.Item position="right">
+        <Menu.Item position="right" text="Log out"  onClick={this.submit} key='dashboard'>Log Out</Menu.Item>
+        </Menu.Item>
+    </Menu>
     }
 }
