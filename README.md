@@ -121,20 +121,20 @@ SeaCode Bank Web App for ICS 427
 ## Part IV Updates/Final: 6/22/20-7/3/20
 
 ### Technical Notes
-
+Specifications for use, how to install, etc.
 
 ### Roles and Responsibilites
 **Mirabela Medallon**
-- 
+- Worked on:
 
 **Tyler Chinen**
-- 
+- Worked on:
 
 **Wei Leong Hiew**
-- 
+- Worked on:
 
 **Patima Poochai**
-- 
+- Worked on:
 
 ### [Link to our Final Repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
 ### [Link to the Final Project Documentation File Within the Repository]()
