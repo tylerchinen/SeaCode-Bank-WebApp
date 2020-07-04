@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Segment, Header, Checkbox, Form, Button, Input, Dimmer, Loader } from 'semantic-ui-react';
+import { Container, Segment, Divider, Message, Header, Checkbox, Form, Button, Input, Dimmer, Loader } from 'semantic-ui-react';
 
 export default class Deposit extends React.Component {
     constructor(props) {
@@ -106,6 +106,9 @@ export default class Deposit extends React.Component {
                 <Header style={{paddingTop: '10px'}} as='h3'>Step 2: Amount</Header>
                 <Input focus placeholder='Enter an amount' name='amount' onChange={this.handleChange} />
                 <Button onClick={this.handleProceed}>Confirm</Button>
+                <Divider />
+                <Message compact error hidden={!this.state.submitError}>Invalid deposit request <br/> Please try again</Message>
+                <Message compact positive hidden={!this.state.success}> Deposited ${this.state.lastRequest} </Message>
                 </Segment>
             </Container>
         )
