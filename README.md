@@ -128,7 +128,7 @@ Specifications for use, how to install, etc.
 - Worked on:
 
 **Tyler Chinen**
-- Worked on:
+- Worked on: Integrating the back end to the front end for the Sign up page, Created the Wiki Page.
 
 **Wei Leong Hiew**
 - Worked on:
