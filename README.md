@@ -178,8 +178,8 @@ To run our application you will need to have an IDE downloaded that is compatibl
 
 
 ### Brief Closing Thoughts
-Thoughts on the outcome of our program looking back at our work including: the challanges, surprises, important achievements we are proud of, dissappointments, disclaimers/caveats.
-- Most of the challanges that we faced were encountered while integrating the front and back end of our program together, we also found it particularly challanging to implement new features after we had the front and and back end integrated. 
+Thoughts on the outcome of our program looking back at our work including: the challenges, surprises, important achievements we are proud of, disappointments, disclaimers/caveats.
+- Most of the challenges that we faced were encountered while integrating the front and back end of our program together, we also found it particularly challanging to implement new features after we had the front and and back end integrated. 
 
 ### Roles and Responsibilites
 **Mirabela Medallon**
