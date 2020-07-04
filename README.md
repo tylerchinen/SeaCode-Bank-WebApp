@@ -197,5 +197,5 @@ Thoughts on the outcome of our program looking back at our work including: the c
 
 ### [Link to our Final Repository](https://github.com/tylerchinen/SeaCode-Bank-WebApp)
 ### [Link to the Final Project Documentation File in the Repo](https://github.com/tylerchinen/SeaCode-Bank-WebApp/blob/master/README.md)
-### [Link to the Release Version of our Program]()
+### [Link to the Release Version of our Program](https://github.com/tylerchinen/SeaCode-Bank-WebApp/releases/tag/1.0.0)
 ### [Link to our Wiki](https://tylerchinen.github.io/seabank.github.io/)
