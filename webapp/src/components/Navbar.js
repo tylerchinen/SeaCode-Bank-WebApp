@@ -52,7 +52,7 @@ export default class Navbar extends React.Component {
           method: 'GET',
           }).then((response) => {
             if (response.ok) {
-
+              alert('Logged out')
             } else {
               this.setState({ logoutError: true });
             }
